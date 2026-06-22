@@ -19,7 +19,7 @@ public class CitaEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCita;
 	private int idCliente;
-	private Date cita;
+	private Date fecha;
 	private LocalTime hora;
 	private String tipoCita;
 	private String estado;

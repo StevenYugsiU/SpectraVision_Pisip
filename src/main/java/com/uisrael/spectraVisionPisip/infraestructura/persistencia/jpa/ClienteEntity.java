@@ -22,10 +22,10 @@ public class ClienteEntity {
 	private String nombres;
 	private String apellidos;
 	private Date fechaNacimiento;
-	private String edad;
+	private int edad;
 	private String ocupacion;
 	private String celular;
 	private String correo;
-	private String fechaRegistro;
+	private Date fechaRegistro;
 	private Boolean estado;
 }

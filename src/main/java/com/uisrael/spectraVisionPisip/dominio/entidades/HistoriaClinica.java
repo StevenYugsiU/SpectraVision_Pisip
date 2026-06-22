@@ -9,6 +9,7 @@ public class HistoriaClinica {
 	private String antecedentes;
 	private String observacionesGenerales;
 	private Boolean estado;
+	
 	public int getIdHistoria() {
 		return idHistoria;
 	}
@@ -45,6 +46,9 @@ public class HistoriaClinica {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+	
+	
+
 	
 	
 }

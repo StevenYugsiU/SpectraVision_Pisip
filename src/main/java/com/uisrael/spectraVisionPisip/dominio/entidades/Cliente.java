@@ -9,12 +9,13 @@ public class Cliente {
 	private String nombres;
 	private String apellidos;
 	private Date fechaNacimiento;
-	private String edad;
+	private int edad;
 	private String ocupacion;
 	private String celular;
 	private String correo;
-	private String fechaRegistro;
+	private Date fechaRegistro;
 	private Boolean estado;
+	
 	public int getIdCliente() {
 		return idCliente;
 	}
@@ -45,10 +46,10 @@ public class Cliente {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-	public String getEdad() {
+	public int getEdad() {
 		return edad;
 	}
-	public void setEdad(String edad) {
+	public void setEdad(int edad) {
 		this.edad = edad;
 	}
 	public String getOcupacion() {
@@ -69,10 +70,10 @@ public class Cliente {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	public String getFechaRegistro() {
+	public Date getFechaRegistro() {
 		return fechaRegistro;
 	}
-	public void setFechaRegistro(String fechaRegistro) {
+	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
 	public Boolean getEstado() {
@@ -81,6 +82,7 @@ public class Cliente {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
+	
 	
 	
 }

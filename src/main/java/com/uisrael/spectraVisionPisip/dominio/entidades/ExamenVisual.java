@@ -5,21 +5,30 @@ import java.util.Date;
 public class ExamenVisual {
 	private int idExamen;
 	private int idHistoria;
-	private Date fechaControl;
+	private Date fechaExamen;
 	private String ultimoControlVisual;
 	private String motivoConsulta;
+	// Agudeza visual
 	private String avOd;
 	private	String avOi;
-	private String sphOl;
+	// Ojo derecho (OD)
+	private String sphOd;
+	private String cylOd;
+	private String ejeOd;
+	// Ojo izquierdo (OI
+	private String sphOi;
 	private String cylOi;
 	private String ejeOi;
+	// Datos adicionales
 	private String addValor;
 	private String dnp;
 	private String altura;
+	// Observaciones del examen
 	private String biomicroscopia;
 	private String recomentaciones;
 	private String proximaConsulta;
 	private String diagnostico;
+	
 	public int getIdExamen() {
 		return idExamen;
 	}
@@ -32,11 +41,11 @@ public class ExamenVisual {
 	public void setIdHistoria(int idHistoria) {
 		this.idHistoria = idHistoria;
 	}
-	public Date getFechaControl() {
-		return fechaControl;
+	public Date getFechaExamen() {
+		return fechaExamen;
 	}
-	public void setFechaControl(Date fechaControl) {
-		this.fechaControl = fechaControl;
+	public void setFechaExamen(Date fechaExamen) {
+		this.fechaExamen = fechaExamen;
 	}
 	public String getUltimoControlVisual() {
 		return ultimoControlVisual;
@@ -62,11 +71,29 @@ public class ExamenVisual {
 	public void setAvOi(String avOi) {
 		this.avOi = avOi;
 	}
-	public String getSphOl() {
-		return sphOl;
+	public String getSphOd() {
+		return sphOd;
 	}
-	public void setSphOl(String sphOl) {
-		this.sphOl = sphOl;
+	public void setSphOd(String sphOd) {
+		this.sphOd = sphOd;
+	}
+	public String getCylOd() {
+		return cylOd;
+	}
+	public void setCylOd(String cylOd) {
+		this.cylOd = cylOd;
+	}
+	public String getEjeOd() {
+		return ejeOd;
+	}
+	public void setEjeOd(String ejeOd) {
+		this.ejeOd = ejeOd;
+	}
+	public String getSphOi() {
+		return sphOi;
+	}
+	public void setSphOi(String sphOi) {
+		this.sphOi = sphOi;
 	}
 	public String getCylOi() {
 		return cylOi;
@@ -122,6 +149,8 @@ public class ExamenVisual {
 	public void setDiagnostico(String diagnostico) {
 		this.diagnostico = diagnostico;
 	}
+	
+	
 	
 	
 }

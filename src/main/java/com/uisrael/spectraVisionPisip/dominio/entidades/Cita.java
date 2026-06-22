@@ -6,10 +6,11 @@ import java.util.Date;
 public class Cita {
 	private int idCita;
 	private int idCliente;
-	private Date cita;
+	private Date fecha;
 	private LocalTime hora;
 	private String tipoCita;
 	private String estado;
+	
 	public int getIdCita() {
 		return idCita;
 	}
@@ -22,11 +23,11 @@ public class Cita {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
-	public Date getCita() {
-		return cita;
+	public Date getFecha() {
+		return fecha;
 	}
-	public void setCita(Date cita) {
-		this.cita = cita;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 	public LocalTime getHora() {
 		return hora;
@@ -46,6 +47,9 @@ public class Cita {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+	
+	
+	
 	
 	
 }
