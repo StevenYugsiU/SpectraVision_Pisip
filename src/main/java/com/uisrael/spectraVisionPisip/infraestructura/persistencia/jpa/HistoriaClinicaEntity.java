@@ -11,8 +11,10 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "historiaClinica")
+@Table(name = "HistoriaClinica")
+
 public class HistoriaClinicaEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idHistoria;

@@ -1,0 +1,17 @@
+package com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.uisrael.spectraVisionPisip.dominio.entidades.HistoriaClinica;
+
+public interface IHistoriaClinicaUseCase {
+
+	HistoriaClinica guardar (HistoriaClinica nuevaHistoriaClinica);
+	
+	HistoriaClinica buscarPorId(int idHistoriaClinica);
+	
+	List<HistoriaClinica> listarTodos();
+	
+	void eliminar (int idHistoriaClinica);
+}

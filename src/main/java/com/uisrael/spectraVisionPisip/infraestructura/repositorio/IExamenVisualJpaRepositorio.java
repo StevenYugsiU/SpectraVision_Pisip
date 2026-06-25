@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.ExamenVisualEntity;
 
-public interface IExamenVisualRepositorio extends JpaRepository<ExamenVisualEntity, Integer>{
+public interface IExamenVisualJpaRepositorio extends JpaRepository<ExamenVisualEntity, Integer>{
 
 }

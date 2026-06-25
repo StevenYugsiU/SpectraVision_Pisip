@@ -15,45 +15,45 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.RolEntity
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.SeguimientoEntity;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.UsuarioEntity;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.UsuarioRolEntity;
-import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ICertificadoRepositorio;
-import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ICitaRepositorio;
-import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IClienteRepositorio;
-import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IExamenVisualRepositorio;
-import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IHistoriaClinicaRepositorio;
-import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IRolRepositorio;
-import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ISeguimientoRepositorio;
-import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IUsuarioRepositorio;
-import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IUsuarioRolRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ICertificadoJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ICitaJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IClienteJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IExamenVisualJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IHistoriaClinicaJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IRolJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ISeguimientoJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IUsuarioJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IUsuarioRolJpaRepositorio;
 
 @SpringBootTest
 class SpectraVisionPisipApplicationTests {
 
 	@Autowired
-	IClienteRepositorio repoCliente;
+	IClienteJpaRepositorio repoCliente;
 	
 	@Autowired
-	IHistoriaClinicaRepositorio repoHistoriaClinica;
+	IHistoriaClinicaJpaRepositorio repoHistoriaClinica;
 	
 	@Autowired
-	IExamenVisualRepositorio repoExamenVisual;
+	IExamenVisualJpaRepositorio repoExamenVisual;
 	
 	@Autowired
-	ICertificadoRepositorio repoCertificado;
+	ICertificadoJpaRepositorio repoCertificado;
 	
 	@Autowired
-	ICitaRepositorio repoCita;
+	ICitaJpaRepositorio repoCita;
 	
 	@Autowired
-	ISeguimientoRepositorio repoSeguimiento;
+	ISeguimientoJpaRepositorio repoSeguimiento;
 	
 	@Autowired
-	IUsuarioRepositorio repoUsuario;
+	IUsuarioJpaRepositorio repoUsuario;
 	
 	@Autowired
-	IRolRepositorio repoRol;
+	IRolJpaRepositorio repoRol;
 	
 	@Autowired
-	IUsuarioRolRepositorio repoUsuarioRol;
+	IUsuarioRolJpaRepositorio repoUsuarioRol;
 	
 	
 	@Test

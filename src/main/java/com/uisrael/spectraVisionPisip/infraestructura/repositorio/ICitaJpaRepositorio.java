@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.CitaEntity;
 
-public interface ICitaRepositorio extends JpaRepository<CitaEntity, Integer>{
+public interface ICitaJpaRepositorio extends JpaRepository<CitaEntity, Integer>{
 
 }

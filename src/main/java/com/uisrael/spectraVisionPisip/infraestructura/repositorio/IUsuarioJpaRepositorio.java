@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.UsuarioEntity;
 
-public interface IUsuarioRepositorio extends JpaRepository<UsuarioEntity, Integer> {
+public interface IUsuarioJpaRepositorio extends JpaRepository<UsuarioEntity, Integer> {
 
 }
