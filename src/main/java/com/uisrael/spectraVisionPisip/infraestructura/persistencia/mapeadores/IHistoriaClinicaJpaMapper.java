@@ -11,5 +11,5 @@ public interface IHistoriaClinicaJpaMapper {
 
 	HistoriaClinica toDomain(HistoriaClinicaEntity entity);
 
-	HistoriaClinicaEntity toEntity(HistoriaClinica historiaClinicaPojo);
+	HistoriaClinicaEntity	 toEntity(HistoriaClinica historiaClinicaPojo);
 }
