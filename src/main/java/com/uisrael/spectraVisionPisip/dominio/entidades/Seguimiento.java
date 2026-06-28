@@ -9,6 +9,18 @@ public class Seguimiento {
 	private Date fechaSeguimiento;
 	private String observaciones;
 	private String estado;
+	
+	public Seguimiento(int idSeguimiento, int idCliente, Date fechaEntrega, Date fechaSeguimiento, String observaciones,
+			String estado) {
+		this.idSeguimiento = idSeguimiento;
+		this.idCliente = idCliente;
+		this.fechaEntrega = fechaEntrega;
+		this.fechaSeguimiento = fechaSeguimiento;
+		this.observaciones = observaciones;
+		this.estado = estado;
+	}
+	
+	
 	public int getIdSeguimiento() {
 		return idSeguimiento;
 	}

@@ -9,6 +9,15 @@ public class Certificado {
 	private Date fechaGeneracion;
 	private String observaciones;
 	
+	
+	
+	public Certificado(int idCertificado, int idExamen, Date fechaGeneracion, String observaciones) {
+		this.idCertificado = idCertificado;
+		this.idExamen = idExamen;
+		this.fechaGeneracion = fechaGeneracion;
+		this.observaciones = observaciones;
+	}
+	
 	public int getIdCertificado() {
 		return idCertificado;
 	}

@@ -10,9 +10,8 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IH
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IHistoriaClinicaJpaRepositorio;
 
 
-public class HistoriaClinicaRepositorioImpl implements IHistoriaClinicaRepositorio {
-	
 
+public class HistoriaClinicaRepositorioImpl implements IHistoriaClinicaRepositorio {
 	
 	private final IHistoriaClinicaJpaRepositorio jpaRepositorio;
 	private final IHistoriaClinicaJpaMapper entityMapper;

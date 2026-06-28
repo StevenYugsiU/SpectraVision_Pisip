@@ -4,6 +4,13 @@ public class UsuarioRol {
 	private int idUsuarioRol;
 	private int idUsuario;
 	private int idRol;
+	
+	public UsuarioRol(int idUsuarioRol, int idUsuario, int idRol) {
+		this.idUsuarioRol = idUsuarioRol;
+		this.idUsuario = idUsuario;
+		this.idRol = idRol;
+	}
+	
 	public int getIdUsuarioRol() {
 		return idUsuarioRol;
 	}

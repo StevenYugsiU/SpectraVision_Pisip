@@ -7,6 +7,17 @@ public class Usuario {
 	private String usuario;
 	private String contrasena;
 	private Boolean estado;
+	
+	
+	public Usuario(int idUsuario, String nombres, String apellidos, String usuario, String contrasena, Boolean estado) {
+		this.idUsuario = idUsuario;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.usuario = usuario;
+		this.contrasena = contrasena;
+		this.estado = estado;
+	}
+	
 	public int getIdUsuario() {
 		return idUsuario;
 	}
