@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "examenvisual")
+@Table(name = "examenVisual")
 public class ExamenVisualEntity {
 
 	@Id

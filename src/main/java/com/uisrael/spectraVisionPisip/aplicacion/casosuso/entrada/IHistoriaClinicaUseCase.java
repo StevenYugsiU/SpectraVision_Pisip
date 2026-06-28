@@ -1,7 +1,6 @@
 package com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada;
 
 import java.util.List;
-import java.util.Optional;
 
 import com.uisrael.spectraVisionPisip.dominio.entidades.HistoriaClinica;
 

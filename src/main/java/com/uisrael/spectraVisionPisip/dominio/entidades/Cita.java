@@ -11,6 +11,17 @@ public class Cita {
 	private String tipoCita;
 	private String estado;
 	
+	
+	
+	public Cita(int idCita, int idCliente, Date fecha, LocalTime hora, String tipoCita, String estado) {
+		this.idCita = idCita;
+		this.idCliente = idCliente;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.tipoCita = tipoCita;
+		this.estado = estado;
+	}
+	
 	public int getIdCita() {
 		return idCita;
 	}

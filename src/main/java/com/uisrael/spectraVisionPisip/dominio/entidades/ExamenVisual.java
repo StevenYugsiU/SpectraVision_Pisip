@@ -29,6 +29,36 @@ public class ExamenVisual {
 	private String proximaConsulta;
 	private String diagnostico;
 	
+	
+	
+	
+	public ExamenVisual(int idExamen, int idHistoria, Date fechaExamen, String ultimoControlVisual,
+			String motivoConsulta, String avOd, String avOi, String sphOd, String cylOd, String ejeOd, String sphOi,
+			String cylOi, String ejeOi, String addValor, String dnp, String altura, String biomicroscopia,
+			String recomentaciones, String proximaConsulta, String diagnostico) {
+		this.idExamen = idExamen;
+		this.idHistoria = idHistoria;
+		this.fechaExamen = fechaExamen;
+		this.ultimoControlVisual = ultimoControlVisual;
+		this.motivoConsulta = motivoConsulta;
+		this.avOd = avOd;
+		this.avOi = avOi;
+		this.sphOd = sphOd;
+		this.cylOd = cylOd;
+		this.ejeOd = ejeOd;
+		this.sphOi = sphOi;
+		this.cylOi = cylOi;
+		this.ejeOi = ejeOi;
+		this.addValor = addValor;
+		this.dnp = dnp;
+		this.altura = altura;
+		this.biomicroscopia = biomicroscopia;
+		this.recomentaciones = recomentaciones;
+		this.proximaConsulta = proximaConsulta;
+		this.diagnostico = diagnostico;
+	}
+	
+	
 	public int getIdExamen() {
 		return idExamen;
 	}

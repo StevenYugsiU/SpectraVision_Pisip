@@ -11,7 +11,6 @@ public class HistoriaClinicaUseCaseImpl implements IHistoriaClinicaUseCase{
 	private final IHistoriaClinicaRepositorio repositorio;
 
 	public HistoriaClinicaUseCaseImpl(IHistoriaClinicaRepositorio repositorio) {
-		super();
 		this.repositorio = repositorio;
 	}
 
@@ -27,13 +26,12 @@ public class HistoriaClinicaUseCaseImpl implements IHistoriaClinicaUseCase{
 
 	@Override
 	public List<HistoriaClinica> listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return repositorio.listarTodos();
 	}
 
 	@Override
 	public void eliminar(int idHistoriaClinica) {
-		// TODO Auto-generated method stub
+		repositorio.eliminar(idHistoriaClinica);
 		
 	}
 	

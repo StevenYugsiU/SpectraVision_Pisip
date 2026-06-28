@@ -16,6 +16,23 @@ public class Cliente {
 	private Date fechaRegistro;
 	private Boolean estado;
 	
+	
+	
+	public Cliente(int idCliente, String cedula, String nombres, String apellidos, Date fechaNacimiento, int edad,
+			String ocupacion, String celular, String correo, Date fechaRegistro, Boolean estado) {
+		this.idCliente = idCliente;
+		this.cedula = cedula;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
+		this.fechaNacimiento = fechaNacimiento;
+		this.edad = edad;
+		this.ocupacion = ocupacion;
+		this.celular = celular;
+		this.correo = correo;
+		this.fechaRegistro = fechaRegistro;
+		this.estado = estado;
+	}
+	
 	public int getIdCliente() {
 		return idCliente;
 	}
