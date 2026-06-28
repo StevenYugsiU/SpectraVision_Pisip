@@ -1,0 +1,18 @@
+package com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada;
+
+import java.util.List;
+
+
+import com.uisrael.spectraVisionPisip.dominio.entidades.Cita;
+
+public interface ICitaUseCase {
+
+	Cita guardar(Cita nuevaCita);
+
+	Cita buscarPorId(int idCita);
+
+	List<Cita> listarTodos();
+
+	void eliminar(int idCita);
+
+}

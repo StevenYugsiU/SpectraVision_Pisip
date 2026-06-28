@@ -21,4 +21,6 @@ public class CertificadoEntity {
 	private Date fechaGeneracion;
 	private String observaciones;
 	
+	
+	
 }
