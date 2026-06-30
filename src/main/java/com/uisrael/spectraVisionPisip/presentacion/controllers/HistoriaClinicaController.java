@@ -49,7 +49,7 @@ public class HistoriaClinicaController {
 				.map(mapper::toResponseDto).toList();
 	}
 	
-	@DeleteMapping("/{idhistoriaClinica}")
+	@DeleteMapping("/{idHistoriaClinica}")
 	public ResponseEntity<Void> elimnar(@PathVariable int idHistoriaClinica){
 		historiaClinicaUseCase.eliminar(idHistoriaClinica);
 		return ResponseEntity.noContent().build();

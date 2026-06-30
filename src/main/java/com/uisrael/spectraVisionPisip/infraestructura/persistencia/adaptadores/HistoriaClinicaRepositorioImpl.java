@@ -18,7 +18,6 @@ public class HistoriaClinicaRepositorioImpl implements IHistoriaClinicaRepositor
 	
 	public HistoriaClinicaRepositorioImpl(IHistoriaClinicaJpaRepositorio jpaRepositorio,
 			IHistoriaClinicaJpaMapper entityMapper) {
-		super();
 		this.jpaRepositorio = jpaRepositorio;
 		this.entityMapper = entityMapper;
 	}
