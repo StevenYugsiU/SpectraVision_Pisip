@@ -1,7 +1,9 @@
 package com.uisrael.spectraVisionPisip.presentacion.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
+@Data
 public class UsuarioRequestDto {
 
 	private int idUsuario;

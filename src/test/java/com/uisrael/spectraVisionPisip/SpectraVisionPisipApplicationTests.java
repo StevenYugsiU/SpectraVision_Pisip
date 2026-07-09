@@ -77,7 +77,6 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Historia Clinica
 		HistoriaClinicaEntity historiaNew = new HistoriaClinicaEntity();
-		historiaNew.setIdCliente(1);
 		historiaNew.setFechaApertura(new Date());
 		historiaNew.setAntecedentes("Miopia");
 		historiaNew.setObservacionesGenerales("Primera historia clínica registrada en el sistema.");
@@ -87,7 +86,6 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Examen Visual
 		ExamenVisualEntity examenNew = new ExamenVisualEntity();
-		examenNew.setIdHistoria(1);
 		examenNew.setFechaExamen(new Date());
 		examenNew.setUltimoControlVisual("Hace 1 año");
 		examenNew.setMotivoConsulta("Vision borrosa de lejos");
@@ -111,7 +109,6 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Certificado
 		CertificadoEntity certificadoNew = new CertificadoEntity();
-		certificadoNew.setIdExamen(1);
 		certificadoNew.setFechaGeneracion(new Date());
 		certificadoNew.setObservaciones("Paciente apto para uso de lentes correctivos.");	
 		repoCertificado.save(certificadoNew);
@@ -119,7 +116,6 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Cita
 		CitaEntity citaNew = new CitaEntity();
-		citaNew.setIdCliente(1);
 		citaNew.setFecha(new Date());
 		citaNew.setTipoCita("Examen Visual");
 		citaNew.setEstado("Agendada");
@@ -128,7 +124,6 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Seguimiento
 		SeguimientoEntity segNew = new SeguimientoEntity();
-		segNew.setIdCliente(1);
 		segNew.setFechaEntrega(new Date());
 		segNew.setFechaSeguimiento(new Date());
 		segNew.setObservaciones("Cliente indica buena adaptación a los lentes entregados.");
@@ -155,20 +150,18 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Usuario Rol
 		UsuarioRolEntity usuRolNew = new UsuarioRolEntity();
-		usuRolNew.setIdUsuario(1);
-		usuRolNew.setIdRol(1);
 		repoUsuarioRol.save(usuRolNew);
-		
-		
+
+
 		System.out.println(cliNew.getNombres() + " " + cliNew.getApellidos());
-		System.out.println(historiaNew.getIdCliente() + " " + historiaNew.getObservacionesGenerales());
-		System.out.println(examenNew.getIdHistoria() + " " + examenNew.getUltimoControlVisual());
+		System.out.println(historiaNew.getObservacionesGenerales());
+		System.out.println(examenNew.getUltimoControlVisual());
 		System.out.println(certificadoNew.getIdCertificado() + " " + certificadoNew.getObservaciones());
-		System.out.println(citaNew.getIdCliente() + " " + citaNew.getTipoCita());
-		System.out.println(segNew.getIdCliente() + " " + segNew.getObservaciones());
+		System.out.println(citaNew.getTipoCita());
+		System.out.println(segNew.getObservaciones());
 		System.out.println(usuarioNew.getNombres() + " " + usuarioNew.getApellidos());
 		System.out.println(rolNew.getNombre() + " " + rolNew.getDescripcion());
-		System.out.println(usuRolNew.getIdUsuario() + " " + usuRolNew.getIdRol());
+		System.out.println(usuRolNew.getIdUsuarioRol());
 		
 		
 	}

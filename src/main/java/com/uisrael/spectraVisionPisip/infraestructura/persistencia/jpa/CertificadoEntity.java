@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -17,7 +19,11 @@ public class CertificadoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCertificado;
-	private int idExamen;
+
+	@ManyToOne
+	@JoinColumn(name = "fk_examen_visual")
+	private ExamenVisualEntity fkExamenVisualEntity;
+
 	private Date fechaGeneracion;
 	private String observaciones;
 	
