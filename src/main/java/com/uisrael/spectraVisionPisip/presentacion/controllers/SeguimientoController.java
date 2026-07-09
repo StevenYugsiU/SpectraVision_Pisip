@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ISeguimientoUseCase;
-import com.uisrael.spectraVisionPisip.presentacion.dto.request.RolRequestDto;
 import com.uisrael.spectraVisionPisip.presentacion.dto.request.SeguimientoRequestDto;
-import com.uisrael.spectraVisionPisip.presentacion.dto.response.RolResponseDto;
 import com.uisrael.spectraVisionPisip.presentacion.dto.response.SeguimientoResponseDto;
 import com.uisrael.spectraVisionPisip.presentacion.mapeadores.ISeguimientoDtoMapper;
 

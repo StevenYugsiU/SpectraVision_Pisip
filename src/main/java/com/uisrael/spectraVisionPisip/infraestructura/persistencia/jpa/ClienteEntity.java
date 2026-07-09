@@ -1,11 +1,14 @@
 package com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -28,4 +31,13 @@ public class ClienteEntity {
 	private String correo;
 	private Date fechaRegistro;
 	private Boolean estado;
+
+	@OneToMany(mappedBy = "fkClienteEntity")
+	private List<HistoriaClinicaEntity> listaHistoriaClinica = new ArrayList<>();
+
+	@OneToMany(mappedBy = "fkClienteEntity")
+	private List<CitaEntity> listaCita = new ArrayList<>();
+
+	@OneToMany(mappedBy = "fkClienteEntity")
+	private List<SeguimientoEntity> listaSeguimiento = new ArrayList<>();
 }
