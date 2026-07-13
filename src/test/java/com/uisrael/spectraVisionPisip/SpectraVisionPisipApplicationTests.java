@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.CertificadoEntity;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.CitaEntity;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.ClienteEntity;
+import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.EntregaEntity;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.ExamenVisualEntity;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.HistoriaClinicaEntity;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.RolEntity;
@@ -18,6 +19,7 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.UsuarioRo
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ICertificadoJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ICitaJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IClienteJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IEntregaJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IExamenVisualJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IHistoriaClinicaJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IRolJpaRepositorio;
@@ -43,6 +45,9 @@ class SpectraVisionPisipApplicationTests {
 	@Autowired
 	ICitaJpaRepositorio repoCita;
 	
+	@Autowired
+	IEntregaJpaRepositorio repoEntrega;
+
 	@Autowired
 	ISeguimientoJpaRepositorio repoSeguimiento;
 	
@@ -77,6 +82,7 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Historia Clinica
 		HistoriaClinicaEntity historiaNew = new HistoriaClinicaEntity();
+		historiaNew.setFkClienteEntity(cliNew);
 		historiaNew.setFechaApertura(new Date());
 		historiaNew.setAntecedentes("Miopia");
 		historiaNew.setObservacionesGenerales("Primera historia clínica registrada en el sistema.");
@@ -86,6 +92,7 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Examen Visual
 		ExamenVisualEntity examenNew = new ExamenVisualEntity();
+		examenNew.setFkHistoriaClinicaEntity(historiaNew);
 		examenNew.setFechaExamen(new Date());
 		examenNew.setUltimoControlVisual("Hace 1 año");
 		examenNew.setMotivoConsulta("Vision borrosa de lejos");
@@ -109,6 +116,7 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Certificado
 		CertificadoEntity certificadoNew = new CertificadoEntity();
+		certificadoNew.setFkExamenVisualEntity(examenNew);
 		certificadoNew.setFechaGeneracion(new Date());
 		certificadoNew.setObservaciones("Paciente apto para uso de lentes correctivos.");	
 		repoCertificado.save(certificadoNew);
@@ -116,15 +124,25 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Cita
 		CitaEntity citaNew = new CitaEntity();
+		citaNew.setFkClienteEntity(cliNew);
 		citaNew.setFecha(new Date());
 		citaNew.setTipoCita("Examen Visual");
 		citaNew.setEstado("Agendada");
 		repoCita.save(citaNew);
 		
 		
+		//Entrega
+		EntregaEntity entregaNew = new EntregaEntity();
+		entregaNew.setFkClienteEntity(cliNew);
+		entregaNew.setFechaEntrega(new Date());
+		entregaNew.setObservaciones("Entrega de lentes correctivos al cliente.");
+		entregaNew.setEstado("Entregado");
+		repoEntrega.save(entregaNew);
+
+
 		//Seguimiento
 		SeguimientoEntity segNew = new SeguimientoEntity();
-		segNew.setFechaEntrega(new Date());
+		segNew.setFkEntregaEntity(entregaNew);
 		segNew.setFechaSeguimiento(new Date());
 		segNew.setObservaciones("Cliente indica buena adaptación a los lentes entregados.");
 		segNew.setEstado("Completado");
@@ -150,6 +168,8 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Usuario Rol
 		UsuarioRolEntity usuRolNew = new UsuarioRolEntity();
+		usuRolNew.setFkUsuarioEntity(usuarioNew);
+		usuRolNew.setFkRolEntity(rolNew);
 		repoUsuarioRol.save(usuRolNew);
 
 

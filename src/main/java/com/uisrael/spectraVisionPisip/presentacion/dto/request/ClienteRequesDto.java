@@ -3,11 +3,12 @@ package com.uisrael.spectraVisionPisip.presentacion.dto.request;
 import java.util.Date;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class ClienteRequesDto {
-	
+
 	private int idCliente;
 	@NotBlank
 	private String cedula;
@@ -15,9 +16,8 @@ public class ClienteRequesDto {
 	private String nombres;
 	@NotBlank
 	private String apellidos;
-	@NotBlank
+	@NotNull
 	private Date fechaNacimiento;
-	@NotBlank
 	private int edad;
 	@NotBlank
 	private String ocupacion;
@@ -25,9 +25,9 @@ public class ClienteRequesDto {
 	private String celular;
 	@NotBlank
 	private String correo;
-	@NotBlank
+	@NotNull
 	private Date fechaRegistro;
-	@NotBlank
+	@NotNull
 	private Boolean estado;
 
 }

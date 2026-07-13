@@ -7,13 +7,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
+public class EntregaRequestDto {
 
-public class SeguimientoRequestDto {
-
-	private int idSeguimiento;
 	private int idEntrega;
+	private int idCliente;
 	@NotNull
-	private Date fechaSeguimiento;
+	private Date fechaEntrega;
 	@NotBlank
 	private String observaciones;
 	@NotBlank
