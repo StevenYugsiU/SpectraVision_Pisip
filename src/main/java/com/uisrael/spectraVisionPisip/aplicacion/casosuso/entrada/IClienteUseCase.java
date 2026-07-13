@@ -8,7 +8,13 @@ public interface IClienteUseCase {
 
 	Cliente guardar(Cliente nuevoCliente);
 
+	Cliente actualizar(int idCliente, Cliente clienteActualizado);
+
 	Cliente buscarPorId(int idCliente);
+
+	Cliente buscarPorCedula(String cedula);
+
+	List<Cliente> buscarPorNombre(String nombre);
 
 	List<Cliente> listarTodos();
 

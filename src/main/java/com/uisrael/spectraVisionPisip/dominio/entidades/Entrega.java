@@ -2,39 +2,39 @@ package com.uisrael.spectraVisionPisip.dominio.entidades;
 
 import java.util.Date;
 
-public class Seguimiento {
-	private int idSeguimiento;
+public class Entrega {
+
 	private int idEntrega;
-	private Date fechaSeguimiento;
+	private int idCliente;
+	private Date fechaEntrega;
 	private String observaciones;
 	private String estado;
 
-	public Seguimiento(int idSeguimiento, int idEntrega, Date fechaSeguimiento, String observaciones,
-			String estado) {
-		this.idSeguimiento = idSeguimiento;
+	public Entrega(int idEntrega, int idCliente, Date fechaEntrega, String observaciones, String estado) {
 		this.idEntrega = idEntrega;
-		this.fechaSeguimiento = fechaSeguimiento;
+		this.idCliente = idCliente;
+		this.fechaEntrega = fechaEntrega;
 		this.observaciones = observaciones;
 		this.estado = estado;
 	}
 
-	public int getIdSeguimiento() {
-		return idSeguimiento;
-	}
-	public void setIdSeguimiento(int idSeguimiento) {
-		this.idSeguimiento = idSeguimiento;
-	}
 	public int getIdEntrega() {
 		return idEntrega;
 	}
 	public void setIdEntrega(int idEntrega) {
 		this.idEntrega = idEntrega;
 	}
-	public Date getFechaSeguimiento() {
-		return fechaSeguimiento;
+	public int getIdCliente() {
+		return idCliente;
 	}
-	public void setFechaSeguimiento(Date fechaSeguimiento) {
-		this.fechaSeguimiento = fechaSeguimiento;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
+	public Date getFechaEntrega() {
+		return fechaEntrega;
+	}
+	public void setFechaEntrega(Date fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
 	}
 	public String getObservaciones() {
 		return observaciones;

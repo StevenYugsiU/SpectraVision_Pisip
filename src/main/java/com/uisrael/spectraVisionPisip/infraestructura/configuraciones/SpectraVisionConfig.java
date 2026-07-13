@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICertificadoUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICitaUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IClienteUseCase;
+import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IEntregaUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IExamenVisualUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IHistoriaClinicaUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IRolUseCase;
@@ -15,6 +16,7 @@ import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IUsuarioUseCas
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.CertificadoUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.CitaUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.ClienteUseCaseImpl;
+import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.EntregaUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.ExamenVisualUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.HistoriaClinicaUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.RolUseCaseImpl;
@@ -24,6 +26,7 @@ import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.UsuarioUseCaseImp
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ICertificadoRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ICitaRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IClienteRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.IEntregaRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IExamenVisualRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IHistoriaClinicaRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IRolRepositorio;
@@ -33,6 +36,7 @@ import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRolRepositorio
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.CertificadoRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.CitaRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.ClienteRepositorioImpl;
+import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.EntregaRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.ExamenVisualRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.HistoriaClinicaRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.RolRepositorioImpl;
@@ -42,6 +46,7 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.U
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.ICertificadoJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.ICitaJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IClienteJpaMapper;
+import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IEntregaJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IExamenVisualJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IHistoriaClinicaJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IRolJpaMapper;
@@ -51,6 +56,7 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IU
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ICertificadoJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ICitaJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IClienteJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IEntregaJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IExamenVisualJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IHistoriaClinicaJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IRolJpaRepositorio;
@@ -165,7 +171,17 @@ public class SpectraVisionConfig {
 	IExamenVisualUseCase examenVisualUseCase(IExamenVisualRepositorio repo) {
 		return new ExamenVisualUseCaseImpl(repo);
 	}
-	
-	
+
+
+	/*Entrega*/
+	@Bean
+	IEntregaRepositorio entregaRepositorio(IEntregaJpaRepositorio jpaRepositorio, IEntregaJpaMapper mapper) {
+		return new EntregaRepositorioImpl(jpaRepositorio, mapper);
+	}
+
+	@Bean
+	IEntregaUseCase entregaUseCase(IEntregaRepositorio repo) {
+		return new EntregaUseCaseImpl(repo);
+	}
 
 }

@@ -34,6 +34,20 @@ public class ClienteRepositorioImpl implements IClienteRepositorio{
 	}
 
 	@Override
+	public Optional<Cliente> buscarPorCedula(String cedula) {
+		return jpaRepositorio.findByCedula(cedula)
+				.map(entityMapper :: toDomain);
+	}
+
+	@Override
+	public List<Cliente> buscarPorNombre(String nombre) {
+		return jpaRepositorio.findByNombresContainingIgnoreCaseOrApellidosContainingIgnoreCase(nombre, nombre)
+				.stream()
+				.map(entityMapper :: toDomain)
+				.toList();
+	}
+
+	@Override
 	public List<Cliente> listarTodos() {
 		return jpaRepositorio.findAll()
 				.stream()

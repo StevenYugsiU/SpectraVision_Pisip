@@ -5,29 +5,22 @@ import java.util.Date;
 public class SeguimientoResponseDto {
 
 	private int idSeguimiento;
-	private int idCliente;
-	private Date fechaEntrega;
+	private int idEntrega;
 	private Date fechaSeguimiento;
 	private String observaciones;
 	private String estado;
-	
+
 	public int getIdSeguimiento() {
 		return idSeguimiento;
 	}
 	public void setIdSeguimiento(int idSeguimiento) {
 		this.idSeguimiento = idSeguimiento;
 	}
-	public int getIdCliente() {
-		return idCliente;
+	public int getIdEntrega() {
+		return idEntrega;
 	}
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
-	}
-	public Date getFechaEntrega() {
-		return fechaEntrega;
-	}
-	public void setFechaEntrega(Date fechaEntrega) {
-		this.fechaEntrega = fechaEntrega;
+	public void setIdEntrega(int idEntrega) {
+		this.idEntrega = idEntrega;
 	}
 	public Date getFechaSeguimiento() {
 		return fechaSeguimiento;
@@ -47,8 +40,5 @@ public class SeguimientoResponseDto {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
-	
-	
+
 }
