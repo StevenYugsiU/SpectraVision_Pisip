@@ -74,8 +74,8 @@ public class SpectraVisionConfig {
 	}
 	
 	@Bean
-	IHistoriaClinicaUseCase historiaClinicaUseCase(IHistoriaClinicaRepositorio repo) {
-		return new HistoriaClinicaUseCaseImpl(repo);
+	IHistoriaClinicaUseCase historiaClinicaUseCase(IHistoriaClinicaRepositorio repo, IClienteRepositorio clienteRepositorio) {
+		return new HistoriaClinicaUseCaseImpl(repo, clienteRepositorio);
 	}
 	
 	/*Rol*/

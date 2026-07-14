@@ -8,10 +8,14 @@ public interface ISeguimientoUseCase {
 
 	Seguimiento guardar(Seguimiento nuevoSeguimiento);
 
+	Seguimiento actualizar(int idSeguimiento, Seguimiento seguimientoActualizado);
+
 	Seguimiento buscarPorId(int idSeguimiento);
 
 	List<Seguimiento> listarTodos();
 
 	void eliminar(int idSeguimiento);
+
+	List<Seguimiento> buscarPorIdEntrega(int idEntrega);
 
 }

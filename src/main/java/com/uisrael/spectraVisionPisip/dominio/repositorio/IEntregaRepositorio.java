@@ -15,4 +15,6 @@ public interface IEntregaRepositorio {
 
 	void eliminar(int idEntrega);
 
+	List<Entrega> buscarPorIdCliente(int idCliente);
+
 }

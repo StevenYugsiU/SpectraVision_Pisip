@@ -22,6 +22,19 @@ public class CitaUseCaseImpl implements ICitaUseCase{
 	}
 
 	@Override
+	public Cita actualizar(int idCita, Cita citaActualizada) {
+
+		Cita existente = buscarPorId(idCita);
+
+		existente.setFecha(citaActualizada.getFecha());
+		existente.setHora(citaActualizada.getHora());
+		existente.setTipoCita(citaActualizada.getTipoCita());
+		existente.setEstado(citaActualizada.getEstado());
+
+		return repositorio.guardar(existente);
+	}
+
+	@Override
 	public Cita buscarPorId(int idCita) {
 		return repositorio.buscarPorId(idCita).orElseThrow(() -> new RuntimeException("No se encontro Cita Medica"));
 	}
@@ -34,9 +47,12 @@ public class CitaUseCaseImpl implements ICitaUseCase{
 	@Override
 	public void eliminar(int idCita) {
 		repositorio.eliminar(idCita);
-		
+
 	}
-	
-	
+
+	@Override
+	public List<Cita> buscarPorIdCliente(int idCliente) {
+		return repositorio.buscarPorIdCliente(idCliente);
+	}
 
 }

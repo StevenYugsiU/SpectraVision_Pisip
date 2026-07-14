@@ -12,7 +12,9 @@ public interface ICertificadoRepositorio {
 	Optional<Certificado> buscarPorId(int idCertificado);
 	
 	List<Certificado> listarTodos();
-	
+
 	void eliminar(int idCertificado);
+
+	List<Certificado> buscarPorIdExamen(int idExamen);
 
 }

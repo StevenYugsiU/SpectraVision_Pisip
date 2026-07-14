@@ -45,4 +45,12 @@ public class EntregaRepositorioImpl implements IEntregaRepositorio {
 		jpaRepositorio.deleteById(idEntrega);
 	}
 
+	@Override
+	public List<Entrega> buscarPorIdCliente(int idCliente) {
+		return jpaRepositorio.findByFkClienteEntityIdCliente(idCliente)
+				.stream()
+				.map(entityMapper :: toDomain)
+				.toList();
+	}
+
 }

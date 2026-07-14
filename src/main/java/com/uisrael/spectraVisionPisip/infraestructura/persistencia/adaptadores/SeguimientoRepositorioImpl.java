@@ -43,13 +43,15 @@ public class SeguimientoRepositorioImpl implements ISeguimientoRepositorio{
 	@Override
 	public void eliminar(int idSeguimiento) {
 		jpaRepositorio.deleteById(idSeguimiento);
-		
+
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public List<Seguimiento> buscarPorIdEntrega(int idEntrega) {
+		return jpaRepositorio.findByFkEntregaEntityIdEntrega(idEntrega)
+				.stream()
+				.map(entityMapper :: toDomain)
+				.toList();
+	}
 
 }

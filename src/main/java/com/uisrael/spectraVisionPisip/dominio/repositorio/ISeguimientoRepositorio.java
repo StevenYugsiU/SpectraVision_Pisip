@@ -15,4 +15,6 @@ public interface ISeguimientoRepositorio {
 	List<Seguimiento> listarTodos();
 
 	void eliminar(int idSeguimiento);
+
+	List<Seguimiento> buscarPorIdEntrega(int idEntrega);
 }

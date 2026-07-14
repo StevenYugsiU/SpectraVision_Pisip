@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -49,6 +50,28 @@ public class SeguimientoController {
 	public ResponseEntity<Void> elimnar(@PathVariable int idSeguimiento){
 		seguimientoUseCase.eliminar(idSeguimiento);
 		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping("/{idSeguimiento}")
+	public SeguimientoResponseDto actualizar(
+			@PathVariable int idSeguimiento,
+			@Valid @RequestBody SeguimientoRequestDto requestSeguimiento) {
+
+		return mapper.toResponseDto(
+				seguimientoUseCase.actualizar(
+						idSeguimiento,
+						mapper.toDomain(requestSeguimiento)));
+	}
+
+	@GetMapping("/{idSeguimiento}")
+	public SeguimientoResponseDto buscarPorId(@PathVariable int idSeguimiento) {
+		return mapper.toResponseDto(seguimientoUseCase.buscarPorId(idSeguimiento));
+	}
+
+	@GetMapping("/entrega/{idEntrega}")
+	public List<SeguimientoResponseDto> buscarPorIdEntrega(@PathVariable int idEntrega) {
+		return seguimientoUseCase.buscarPorIdEntrega(idEntrega).stream()
+				.map(mapper::toResponseDto).toList();
 	}
 
 }

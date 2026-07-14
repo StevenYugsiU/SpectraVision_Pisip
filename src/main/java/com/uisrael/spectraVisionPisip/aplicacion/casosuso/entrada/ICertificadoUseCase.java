@@ -8,11 +8,15 @@ public interface ICertificadoUseCase {
 		
 	
 	Certificado guardar(Certificado nuevoCertificado);
-	
+
+	Certificado actualizar(int idCertificado, Certificado certificadoActualizado);
+
 	Certificado buscarPorId(int idCertificado);
-	
+
 	List<Certificado> listarTodos();
-	
+
 	void eliminar(int idCertificado);
+
+	List<Certificado> buscarPorIdExamen(int idExamen);
 
 }

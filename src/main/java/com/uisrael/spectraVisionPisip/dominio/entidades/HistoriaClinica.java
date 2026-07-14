@@ -16,8 +16,8 @@ public class HistoriaClinica {
 			String observacionesGenerales, Boolean estado) {
 		this.idHistoriaClinica = idHistoriaClinica;
 		this.idCliente = idCliente;
-		this.fechaApertura = fechaApertura;
-		this.antecedentes = antecedentes;
+		setFechaApertura(fechaApertura);
+		setAntecedentes(antecedentes);
 		this.observacionesGenerales = observacionesGenerales;
 		this.estado = estado;
 	}
@@ -49,6 +49,9 @@ public class HistoriaClinica {
 
 
 	public void setFechaApertura(Date fechaApertura) {
+		if (fechaApertura == null) {
+			throw new IllegalArgumentException("La fecha de apertura es obligatoria");
+		}
 		this.fechaApertura = fechaApertura;
 	}
 
@@ -59,6 +62,9 @@ public class HistoriaClinica {
 
 
 	public void setAntecedentes(String antecedentes) {
+		if (antecedentes == null || antecedentes.isBlank()) {
+			throw new IllegalArgumentException("Los antecedentes son obligatorios");
+		}
 		this.antecedentes = antecedentes;
 	}
 
