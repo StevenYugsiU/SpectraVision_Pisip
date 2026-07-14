@@ -14,4 +14,6 @@ public interface IExamenVisualRepositorio {
 	List<ExamenVisual> listarTodos();
 	
 	void eliminar(int idExamenVisual);
+	
+	List<ExamenVisual> buscarPorIdHistoria(int idHistoriaClinica);
 }

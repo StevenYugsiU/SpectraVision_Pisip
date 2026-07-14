@@ -12,11 +12,12 @@ public interface IClienteRepositorio {
 	Optional<Cliente> buscarPorId(int idCliente);
 
 	Optional<Cliente> buscarPorCedula(String cedula);
-
-	List<Cliente> buscarPorNombre(String nombre);
+	
+	void eliminar(int idCliente);
 
 	List<Cliente> listarTodos();
 
-	void eliminar(int idCliente);
+	List<Cliente> buscarPorNombre(String nombres);
 
+	
 }

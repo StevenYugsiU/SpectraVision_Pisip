@@ -50,4 +50,11 @@ public class HistoriaClinicaRepositorioImpl implements IHistoriaClinicaRepositor
 		
 	}
 
+
+	@Override
+	public Optional<HistoriaClinica> buscarPorIdCliente(int idCliente) {
+		   return jpaRepositorio.findByFkClienteEntityIdCliente(idCliente)
+		            .map(entityMapper::toDomain);
+	}
+
 }

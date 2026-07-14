@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -53,6 +54,32 @@ public class HistoriaClinicaController {
 	public ResponseEntity<Void> elimnar(@PathVariable int idHistoriaClinica){
 		historiaClinicaUseCase.eliminar(idHistoriaClinica);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PutMapping("/{idHistoriaClinica}")
+	public HistoriaClinicaResponseDto actualizar(
+			@PathVariable int idHistoriaClinica,
+			@Valid @RequestBody HistoriaClinicaRequestDto requestHistoriaClinica) {
+
+		return mapper.toResponseDto(
+				historiaClinicaUseCase.actualizar(
+						idHistoriaClinica,
+						mapper.toDomain(requestHistoriaClinica)));
+	}
+	
+	
+	@GetMapping("/{idHistoriaClinica}")
+	public HistoriaClinicaResponseDto buscarPorId(@PathVariable int idHistoriaClinica) {
+	    return mapper.toResponseDto(
+	            historiaClinicaUseCase.buscarPorId(idHistoriaClinica));
+	}
+	
+	@GetMapping("/cliente/{idCliente}")
+	public HistoriaClinicaResponseDto buscarPorIdCliente(
+			@PathVariable int idCliente) {
+
+		return mapper.toResponseDto(
+				historiaClinicaUseCase.buscarPorIdCliente(idCliente));
 	}
 	
 	

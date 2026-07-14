@@ -19,6 +19,40 @@ public class ExamenVisualUseCaseImpl implements IExamenVisualUseCase{
 	public ExamenVisual guardar(ExamenVisual nuevoExamenVisual) {
 		return repositorio.guardar(nuevoExamenVisual);
 	}
+	
+	@Override
+	public ExamenVisual actualizar(int idExamenVisual,
+			ExamenVisual examenActualizado) {
+
+		ExamenVisual existente = buscarPorId(idExamenVisual);
+
+		existente.setFechaExamen(examenActualizado.getFechaExamen());
+		existente.setUltimoControlVisual(examenActualizado.getUltimoControlVisual());
+		existente.setMotivoConsulta(examenActualizado.getMotivoConsulta());
+
+		existente.setAvOd(examenActualizado.getAvOd());
+		existente.setAvOi(examenActualizado.getAvOi());
+
+		existente.setSphOd(examenActualizado.getSphOd());
+		existente.setCylOd(examenActualizado.getCylOd());
+		existente.setEjeOd(examenActualizado.getEjeOd());
+
+		existente.setSphOi(examenActualizado.getSphOi());
+		existente.setCylOi(examenActualizado.getCylOi());
+		existente.setEjeOi(examenActualizado.getEjeOi());
+
+		existente.setAddValor(examenActualizado.getAddValor());
+		existente.setDnp(examenActualizado.getDnp());
+		existente.setAltura(examenActualizado.getAltura());
+
+		existente.setBiomicroscopia(examenActualizado.getBiomicroscopia());
+		existente.setRecomentaciones(examenActualizado.getRecomentaciones());
+		existente.setProximaConsulta(examenActualizado.getProximaConsulta());
+		existente.setDiagnostico(examenActualizado.getDiagnostico());
+
+		return repositorio.guardar(existente);
+	}
+	
 
 	@Override
 	public ExamenVisual buscarPorId(int idExamenVisual) {
@@ -34,6 +68,11 @@ public class ExamenVisualUseCaseImpl implements IExamenVisualUseCase{
 	public void eliminar(int idExamenVisual) {
 		repositorio.eliminar(idExamenVisual);
 		
+	}
+	
+	@Override
+	public List<ExamenVisual> buscarPorIdHistoria(int idHistoriaClinica) {
+		return repositorio.buscarPorIdHistoria(idHistoriaClinica);
 	}
 
 }

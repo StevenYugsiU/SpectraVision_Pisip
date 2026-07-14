@@ -14,7 +14,7 @@ public interface IClienteUseCase {
 
 	Cliente buscarPorCedula(String cedula);
 
-	List<Cliente> buscarPorNombre(String nombre);
+	List<Cliente> buscarPorNombre(String nombres);
 
 	List<Cliente> listarTodos();
 

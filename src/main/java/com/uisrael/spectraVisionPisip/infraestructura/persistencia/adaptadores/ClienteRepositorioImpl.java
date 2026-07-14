@@ -9,12 +9,11 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.ClienteEn
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IClienteJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IClienteJpaRepositorio;
 
-public class ClienteRepositorioImpl implements IClienteRepositorio{
+public class ClienteRepositorioImpl implements IClienteRepositorio {
 
 	private final IClienteJpaRepositorio jpaRepositorio;
 	private final IClienteJpaMapper entityMapper;
-	
-	
+
 	public ClienteRepositorioImpl(IClienteJpaRepositorio jpaRepositorio, IClienteJpaMapper entityMapper) {
 		this.jpaRepositorio = jpaRepositorio;
 		this.entityMapper = entityMapper;
@@ -29,36 +28,30 @@ public class ClienteRepositorioImpl implements IClienteRepositorio{
 
 	@Override
 	public Optional<Cliente> buscarPorId(int idCliente) {
-		return jpaRepositorio.findById(idCliente)
-				.map(entityMapper :: toDomain);
-	}
-
-	@Override
-	public Optional<Cliente> buscarPorCedula(String cedula) {
-		return jpaRepositorio.findByCedula(cedula)
-				.map(entityMapper :: toDomain);
-	}
-
-	@Override
-	public List<Cliente> buscarPorNombre(String nombre) {
-		return jpaRepositorio.findByNombresContainingIgnoreCaseOrApellidosContainingIgnoreCase(nombre, nombre)
-				.stream()
-				.map(entityMapper :: toDomain)
-				.toList();
+		return jpaRepositorio.findById(idCliente).map(entityMapper::toDomain);
 	}
 
 	@Override
 	public List<Cliente> listarTodos() {
-		return jpaRepositorio.findAll()
-				.stream()
-				.map(entityMapper :: toDomain)
-				.toList();
+		return jpaRepositorio.findAll().stream().map(entityMapper::toDomain).toList();
 	}
 
 	@Override
 	public void eliminar(int idCliente) {
 		jpaRepositorio.deleteById(idCliente);
-		
+
+	}
+
+	@Override
+	public Optional<Cliente> buscarPorCedula(String cedula) {
+		return jpaRepositorio.findByCedula(cedula).map(entityMapper::toDomain);
+
+	}
+
+	@Override
+	public List<Cliente> buscarPorNombre(String nombres) {
+		return jpaRepositorio.findByNombresContainingIgnoreCaseOrApellidosContainingIgnoreCase(nombres, nombres).stream().map(entityMapper::toDomain)
+				.toList();
 	}
 
 }

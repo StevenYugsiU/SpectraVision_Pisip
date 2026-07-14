@@ -61,8 +61,8 @@ public class ClienteUseCaseImpl implements IClienteUseCase{
 	}
 
 	@Override
-	public List<Cliente> buscarPorNombre(String nombre) {
-		return repositorio.buscarPorNombre(nombre);
+	public List<Cliente> buscarPorNombre(String nombres) {
+		return repositorio.buscarPorNombre(nombres);
 	}
 
 	@Override

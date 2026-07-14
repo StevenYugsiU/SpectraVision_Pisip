@@ -11,7 +11,6 @@ public interface IClienteJpaRepositorio extends JpaRepository<ClienteEntity, Int
 
 	Optional<ClienteEntity> findByCedula(String cedula);
 
-	List<ClienteEntity> findByNombresContainingIgnoreCaseOrApellidosContainingIgnoreCase(String nombres,
-			String apellidos);
+	List<ClienteEntity> findByNombresContainingIgnoreCaseOrApellidosContainingIgnoreCase(String nombres, String apellidos);
 
 }
