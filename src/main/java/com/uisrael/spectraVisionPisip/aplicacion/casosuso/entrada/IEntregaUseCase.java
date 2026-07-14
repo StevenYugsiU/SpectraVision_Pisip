@@ -8,10 +8,14 @@ public interface IEntregaUseCase {
 
 	Entrega guardar(Entrega nuevaEntrega);
 
+	Entrega actualizar(int idEntrega, Entrega entregaActualizada);
+
 	Entrega buscarPorId(int idEntrega);
 
 	List<Entrega> listarTodos();
 
 	void eliminar(int idEntrega);
+
+	List<Entrega> buscarPorIdCliente(int idCliente);
 
 }

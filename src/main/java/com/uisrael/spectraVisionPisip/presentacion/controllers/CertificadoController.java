@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -51,7 +52,27 @@ public class CertificadoController {
 		certificadoUseCase.eliminar(idCertificado);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
+
+	@PutMapping("/{idCertificado}")
+	public CertificadoResponseDto actualizar(
+			@PathVariable int idCertificado,
+			@Valid @RequestBody CertificadoRequestDto requestCertificado) {
+
+		return mapper.toResponseDto(
+				certificadoUseCase.actualizar(
+						idCertificado,
+						mapper.toDomain(requestCertificado)));
+	}
+
+	@GetMapping("/{idCertificado}")
+	public CertificadoResponseDto buscarPorId(@PathVariable int idCertificado) {
+		return mapper.toResponseDto(certificadoUseCase.buscarPorId(idCertificado));
+	}
+
+	@GetMapping("/examen/{idExamen}")
+	public List<CertificadoResponseDto> buscarPorIdExamen(@PathVariable int idExamen) {
+		return certificadoUseCase.buscarPorIdExamen(idExamen).stream()
+				.map(mapper::toResponseDto).toList();
+	}
 
 }

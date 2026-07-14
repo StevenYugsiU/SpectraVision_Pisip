@@ -22,6 +22,18 @@ public class SeguimientoUseCaseImpl implements ISeguimientoUseCase {
 	}
 
 	@Override
+	public Seguimiento actualizar(int idSeguimiento, Seguimiento seguimientoActualizado) {
+
+		Seguimiento existente = buscarPorId(idSeguimiento);
+
+		existente.setFechaSeguimiento(seguimientoActualizado.getFechaSeguimiento());
+		existente.setObservaciones(seguimientoActualizado.getObservaciones());
+		existente.setEstado(seguimientoActualizado.getEstado());
+
+		return repositorio.guardar(existente);
+	}
+
+	@Override
 	public Seguimiento buscarPorId(int idSeguimiento) {
 		return repositorio.buscarPorId(idSeguimiento).orElseThrow(() -> new RuntimeException("No se encontro Rol"));
 	}
@@ -34,7 +46,12 @@ public class SeguimientoUseCaseImpl implements ISeguimientoUseCase {
 	@Override
 	public void eliminar(int idSeguimiento) {
 		repositorio.eliminar(idSeguimiento);
-		
+
+	}
+
+	@Override
+	public List<Seguimiento> buscarPorIdEntrega(int idEntrega) {
+		return repositorio.buscarPorIdEntrega(idEntrega);
 	}
 
 }

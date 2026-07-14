@@ -4,18 +4,25 @@ import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IHistoriaClinicaUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.HistoriaClinica;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.IClienteRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IHistoriaClinicaRepositorio;
 
 public class HistoriaClinicaUseCaseImpl implements IHistoriaClinicaUseCase {
 
 	private final IHistoriaClinicaRepositorio repositorio;
+	private final IClienteRepositorio clienteRepositorio;
 
-	public HistoriaClinicaUseCaseImpl(IHistoriaClinicaRepositorio repositorio) {
+	public HistoriaClinicaUseCaseImpl(IHistoriaClinicaRepositorio repositorio, IClienteRepositorio clienteRepositorio) {
 		this.repositorio = repositorio;
+		this.clienteRepositorio = clienteRepositorio;
 	}
 
 	@Override
 	public HistoriaClinica guardar(HistoriaClinica nuevaHistoriaClinica) {
+
+		clienteRepositorio.buscarPorId(nuevaHistoriaClinica.getIdCliente())
+				.orElseThrow(() -> new RuntimeException(
+						"No se encontro el cliente con id " + nuevaHistoriaClinica.getIdCliente()));
 
 		repositorio.buscarPorIdCliente(nuevaHistoriaClinica.getIdCliente()).ifPresent(existente -> {
 			throw new RuntimeException("El cliente con id " + nuevaHistoriaClinica.getIdCliente()

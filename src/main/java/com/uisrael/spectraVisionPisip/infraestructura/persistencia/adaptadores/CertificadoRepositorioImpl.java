@@ -45,7 +45,15 @@ public class CertificadoRepositorioImpl implements ICertificadoRepositorio{
 	@Override
 	public void eliminar(int idCertificado) {
 		jpaRepositorio.deleteById(idCertificado);
-		
+
+	}
+
+	@Override
+	public List<Certificado> buscarPorIdExamen(int idExamen) {
+		return jpaRepositorio.findByFkExamenVisualEntityIdExamen(idExamen)
+				.stream()
+				.map(entityMapper :: toDomain)
+				.toList();
 	}
 
 }

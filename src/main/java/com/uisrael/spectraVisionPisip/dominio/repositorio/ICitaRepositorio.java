@@ -12,6 +12,8 @@ public interface ICitaRepositorio {
 	Optional<Cita> buscarPorId(int idCita);
 	
 	List<Cita> listarTodos();
-	
+
 	void eliminar(int idCita);
+
+	List<Cita> buscarPorIdCliente(int idCliente);
 }

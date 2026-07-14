@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -53,6 +54,23 @@ public class EntregaController {
 	public ResponseEntity<Void> eliminar(@PathVariable int idEntrega) {
 		entregaUseCase.eliminar(idEntrega);
 		return ResponseEntity.noContent().build();
+	}
+
+	@PutMapping("/{idEntrega}")
+	public EntregaResponseDto actualizar(
+			@PathVariable int idEntrega,
+			@Valid @RequestBody EntregaRequestDto requestEntrega) {
+
+		return mapper.toResponseDto(
+				entregaUseCase.actualizar(
+						idEntrega,
+						mapper.toDomain(requestEntrega)));
+	}
+
+	@GetMapping("/cliente/{idCliente}")
+	public List<EntregaResponseDto> buscarPorIdCliente(@PathVariable int idCliente) {
+		return entregaUseCase.buscarPorIdCliente(idCliente).stream()
+				.map(mapper::toResponseDto).toList();
 	}
 
 }

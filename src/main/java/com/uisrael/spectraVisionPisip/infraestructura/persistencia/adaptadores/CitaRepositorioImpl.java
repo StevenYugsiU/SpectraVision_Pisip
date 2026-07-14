@@ -45,7 +45,15 @@ public class CitaRepositorioImpl implements ICitaRepositorio{
 	@Override
 	public void eliminar(int idCita) {
 		jpaRepositorio.deleteById(idCita);
-		
+
+	}
+
+	@Override
+	public List<Cita> buscarPorIdCliente(int idCliente) {
+		return jpaRepositorio.findByFkClienteEntityIdCliente(idCliente)
+				.stream()
+				.map(entityMapper :: toDomain)
+				.toList();
 	}
 
 }
