@@ -18,4 +18,6 @@ public interface ISeguimientoUseCase {
 
 	List<Seguimiento> buscarPorIdEntrega(int idEntrega);
 
+	List<Seguimiento> buscarAlertasPendientes(int diasProximidad);
+
 }

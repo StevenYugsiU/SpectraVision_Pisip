@@ -9,6 +9,6 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.RolEntity
 public interface IRolJpaMapper {
 
 	Rol toDomain(RolEntity entity);
-	
+
 	RolEntity toEntity(Rol rolPojo);
 }

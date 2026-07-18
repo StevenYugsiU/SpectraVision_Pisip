@@ -9,5 +9,6 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.UsuarioEn
 public interface IUsuarioJpaMapper {
 
 	Usuario toDomain(UsuarioEntity entity);
+
 	UsuarioEntity toEntity(Usuario usuarioPojo);
 }

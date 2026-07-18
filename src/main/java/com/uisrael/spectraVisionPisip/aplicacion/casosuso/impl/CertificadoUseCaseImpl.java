@@ -5,18 +5,26 @@ import java.util.List;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICertificadoUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.Certificado;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ICertificadoRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.IExamenVisualRepositorio;
 
 public class CertificadoUseCaseImpl implements ICertificadoUseCase{
 
 	private final ICertificadoRepositorio repositorio;
-	
-	
-	public CertificadoUseCaseImpl(ICertificadoRepositorio repositorio) {
+	private final IExamenVisualRepositorio examenVisualRepositorio;
+
+
+	public CertificadoUseCaseImpl(ICertificadoRepositorio repositorio, IExamenVisualRepositorio examenVisualRepositorio) {
 		this.repositorio = repositorio;
+		this.examenVisualRepositorio = examenVisualRepositorio;
 	}
 
 	@Override
 	public Certificado guardar(Certificado nuevoCertificado) {
+
+		examenVisualRepositorio.buscarPorId(nuevoCertificado.getIdExamen())
+				.orElseThrow(() -> new RuntimeException(
+						"No se encontro el examen visual con id " + nuevoCertificado.getIdExamen()));
+
 		return repositorio.guardar(nuevoCertificado);
 	}
 

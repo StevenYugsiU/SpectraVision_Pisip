@@ -1,7 +1,9 @@
 package com.uisrael.spectraVisionPisip.presentacion.controllers;
 
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -73,6 +75,18 @@ public class CitaController {
 	public List<CitaResponseDto> buscarPorIdCliente(@PathVariable int idCliente) {
 		return citaUseCase.buscarPorIdCliente(idCliente).stream()
 				.map(mapper::toResponseDto).toList();
+	}
+
+	@GetMapping("/fecha/{fecha}")
+	public List<CitaResponseDto> buscarPorFecha(
+			@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date fecha) {
+		return citaUseCase.buscarPorFecha(fecha).stream()
+				.map(mapper::toResponseDto).toList();
+	}
+
+	@PutMapping("/{idCita}/cancelar")
+	public CitaResponseDto cancelar(@PathVariable int idCita) {
+		return mapper.toResponseDto(citaUseCase.cancelar(idCita));
 	}
 
 }
