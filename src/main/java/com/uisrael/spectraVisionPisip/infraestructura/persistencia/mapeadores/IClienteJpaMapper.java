@@ -9,7 +9,7 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.ClienteEn
 public interface IClienteJpaMapper {
 
 	Cliente toDomain(ClienteEntity entity);
-	
+
 	ClienteEntity toEntity(Cliente clientePojo);
-	
+
 }

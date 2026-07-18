@@ -1,5 +1,6 @@
 package com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,14 @@ public class SeguimientoRepositorioImpl implements ISeguimientoRepositorio{
 	@Override
 	public List<Seguimiento> buscarPorIdEntrega(int idEntrega) {
 		return jpaRepositorio.findByFkEntregaEntityIdEntrega(idEntrega)
+				.stream()
+				.map(entityMapper :: toDomain)
+				.toList();
+	}
+
+	@Override
+	public List<Seguimiento> buscarProximos(Date desde, Date hasta) {
+		return jpaRepositorio.findByFechaSeguimientoBetweenOrderByFechaSeguimientoAsc(desde, hasta)
 				.stream()
 				.map(entityMapper :: toDomain)
 				.toList();

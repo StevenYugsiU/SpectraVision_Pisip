@@ -44,7 +44,13 @@ public class UsuarioRepositorioImpl implements IUsuarioRepositorio{
 	@Override
 	public void eliminar(int idUsuario) {
 		jpaRepositorio.deleteById(idUsuario);
-		
+
+	}
+
+	@Override
+	public Optional<Usuario> buscarPorUsuario(String usuario) {
+		return jpaRepositorio.findByUsuario(usuario)
+				.map(entityMapper :: toDomain);
 	}
 
 }

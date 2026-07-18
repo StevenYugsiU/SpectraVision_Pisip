@@ -4,19 +4,34 @@ import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IExamenVisualUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.ExamenVisual;
+import com.uisrael.spectraVisionPisip.dominio.entidades.HistoriaClinica;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IExamenVisualRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.IHistoriaClinicaRepositorio;
 
 public class ExamenVisualUseCaseImpl implements IExamenVisualUseCase{
 
 	private final IExamenVisualRepositorio repositorio;
-	
-	
-	public ExamenVisualUseCaseImpl(IExamenVisualRepositorio repositorio) {
+	private final IHistoriaClinicaRepositorio historiaClinicaRepositorio;
+
+
+	public ExamenVisualUseCaseImpl(IExamenVisualRepositorio repositorio,
+			IHistoriaClinicaRepositorio historiaClinicaRepositorio) {
 		this.repositorio = repositorio;
+		this.historiaClinicaRepositorio = historiaClinicaRepositorio;
 	}
 
 	@Override
 	public ExamenVisual guardar(ExamenVisual nuevoExamenVisual) {
+
+		HistoriaClinica historia = historiaClinicaRepositorio.buscarPorId(nuevoExamenVisual.getIdHistoria())
+				.orElseThrow(() -> new RuntimeException(
+						"No se encontro la historia clinica con id " + nuevoExamenVisual.getIdHistoria()));
+
+		if (!Boolean.TRUE.equals(historia.getEstado())) {
+			throw new RuntimeException(
+					"La historia clinica con id " + nuevoExamenVisual.getIdHistoria() + " no esta activa");
+		}
+
 		return repositorio.guardar(nuevoExamenVisual);
 	}
 	

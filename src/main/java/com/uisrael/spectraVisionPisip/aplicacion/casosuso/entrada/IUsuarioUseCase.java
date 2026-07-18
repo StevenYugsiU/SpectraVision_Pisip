@@ -8,6 +8,8 @@ public interface IUsuarioUseCase {
 
 	Usuario guardar(Usuario nuevoUsuario);
 
+	Usuario actualizar(int idUsuario, Usuario usuarioActualizado);
+
 	Usuario buscarPorId(int idUsuario);
 
 	List<Usuario> listarTodos();

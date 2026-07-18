@@ -14,7 +14,7 @@ public class Certificado {
 	public Certificado(int idCertificado, int idExamen, Date fechaGeneracion, String observaciones) {
 		this.idCertificado = idCertificado;
 		this.idExamen = idExamen;
-		this.fechaGeneracion = fechaGeneracion;
+		setFechaGeneracion(fechaGeneracion);
 		this.observaciones = observaciones;
 	}
 	
@@ -34,6 +34,9 @@ public class Certificado {
 		return fechaGeneracion;
 	}
 	public void setFechaGeneracion(Date fechaGeneracion) {
+		if (fechaGeneracion == null) {
+			throw new IllegalArgumentException("La fecha de generacion es obligatoria");
+		}
 		this.fechaGeneracion = fechaGeneracion;
 	}
 	public String getObservaciones() {
