@@ -34,5 +34,3 @@ build/
 bin/
 
 ### CLAUDE ###
-.claude/
-CLAUDE.md
