@@ -97,8 +97,8 @@ public class SpectraVisionConfig {
 	}
 	
 	@Bean
-	ISeguimientoUseCase seguimientoUseCase(ISeguimientoRepositorio repo) {
-		return new SeguimientoUseCaseImpl(repo);
+	ISeguimientoUseCase seguimientoUseCase(ISeguimientoRepositorio repo, IEntregaRepositorio entregaRepositorio) {
+		return new SeguimientoUseCaseImpl(repo, entregaRepositorio);
 	}
 	
 	/*Usuario*/
@@ -120,8 +120,8 @@ public class SpectraVisionConfig {
 	}
 	
 	@Bean
-	IUsuarioRolUseCase usuarioRolUseCase(IUsuarioRolRepositorio repo) {
-		return new UsuarioRolUseCaseImpl(repo);
+	IUsuarioRolUseCase usuarioRolUseCase(IUsuarioRolRepositorio repo, IUsuarioRepositorio usuarioRepositorio, IRolRepositorio rolRepositorio) {
+		return new UsuarioRolUseCaseImpl(repo, usuarioRepositorio, rolRepositorio);
 	}
 	
 	
@@ -132,8 +132,8 @@ public class SpectraVisionConfig {
 	}
 	
 	@Bean
-	ICertificadoUseCase certificadoUseCase(ICertificadoRepositorio repo) {
-		return new CertificadoUseCaseImpl(repo);
+	ICertificadoUseCase certificadoUseCase(ICertificadoRepositorio repo, IExamenVisualRepositorio examenVisualRepositorio) {
+		return new CertificadoUseCaseImpl(repo, examenVisualRepositorio);
 	}
 	
 	
@@ -168,8 +168,8 @@ public class SpectraVisionConfig {
 		return new ExamenVisualRepositorioImpl(jpaRepositorio, mapper);
 	}
 	@Bean
-	IExamenVisualUseCase examenVisualUseCase(IExamenVisualRepositorio repo) {
-		return new ExamenVisualUseCaseImpl(repo);
+	IExamenVisualUseCase examenVisualUseCase(IExamenVisualRepositorio repo, IHistoriaClinicaRepositorio historiaClinicaRepositorio) {
+		return new ExamenVisualUseCaseImpl(repo, historiaClinicaRepositorio);
 	}
 
 
@@ -180,8 +180,8 @@ public class SpectraVisionConfig {
 	}
 
 	@Bean
-	IEntregaUseCase entregaUseCase(IEntregaRepositorio repo) {
-		return new EntregaUseCaseImpl(repo);
+	IEntregaUseCase entregaUseCase(IEntregaRepositorio repo, IClienteRepositorio clienteRepositorio) {
+		return new EntregaUseCaseImpl(repo, clienteRepositorio);
 	}
 
 }

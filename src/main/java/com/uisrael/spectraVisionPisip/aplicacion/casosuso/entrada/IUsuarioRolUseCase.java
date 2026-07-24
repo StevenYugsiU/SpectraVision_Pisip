@@ -8,6 +8,8 @@ public interface IUsuarioRolUseCase {
 
 	UsuarioRol guardar(UsuarioRol nuevoUsuarioRol);
 
+	UsuarioRol actualizar(int idUsuarioRol, UsuarioRol usuarioRolActualizado);
+
 	UsuarioRol buscarPorId(int idUsuarioRol);
 
 	List<UsuarioRol> listarTodos();

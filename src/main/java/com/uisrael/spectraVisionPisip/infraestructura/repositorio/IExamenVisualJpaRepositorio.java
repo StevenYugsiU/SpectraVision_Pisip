@@ -8,5 +8,5 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.ExamenVis
 
 public interface IExamenVisualJpaRepositorio extends JpaRepository<ExamenVisualEntity, Integer>{
 
-	List<ExamenVisualEntity> findByFkHistoriaClinicaEntityIdHistoriaClinica(int idHistoriaClinica);
+	List<ExamenVisualEntity> findByFkHistoriaClinicaEntityIdHistoriaClinicaOrderByFechaExamenAsc(int idHistoriaClinica);
 }

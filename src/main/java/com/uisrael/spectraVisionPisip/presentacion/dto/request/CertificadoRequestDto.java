@@ -17,6 +17,6 @@ public class CertificadoRequestDto {
 	private Date fechaGeneracion;
 	@NotBlank
 	private String observaciones;
-	
+
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -51,6 +52,21 @@ public class UsuarioController {
 		usuarioUseCase.eliminar(idUsuario);
 		return ResponseEntity.noContent().build();
 	}
-	
+
+	@GetMapping("/{idUsuario}")
+	public UsuarioResponseDto buscarPorId(@PathVariable int idUsuario) {
+		return mapper.toResponseDto(usuarioUseCase.buscarPorId(idUsuario));
+	}
+
+	@PutMapping("/{idUsuario}")
+	public UsuarioResponseDto actualizar(
+			@PathVariable int idUsuario,
+			@Valid @RequestBody UsuarioRequestDto requestUsuario) {
+
+		return mapper.toResponseDto(
+				usuarioUseCase.actualizar(
+						idUsuario,
+						mapper.toDomain(requestUsuario)));
+	}
 
 }

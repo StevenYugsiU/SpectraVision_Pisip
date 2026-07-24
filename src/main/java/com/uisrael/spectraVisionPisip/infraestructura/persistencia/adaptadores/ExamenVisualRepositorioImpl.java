@@ -51,7 +51,7 @@ public class ExamenVisualRepositorioImpl implements IExamenVisualRepositorio{
 	@Override
 	public List<ExamenVisual> buscarPorIdHistoria(int idHistoriaClinica) {
 		return jpaRepositorio
-				.findByFkHistoriaClinicaEntityIdHistoriaClinica(idHistoriaClinica)
+				.findByFkHistoriaClinicaEntityIdHistoriaClinicaOrderByFechaExamenAsc(idHistoriaClinica)
 				.stream()
 				.map(entityMapper::toDomain)
 				.toList();

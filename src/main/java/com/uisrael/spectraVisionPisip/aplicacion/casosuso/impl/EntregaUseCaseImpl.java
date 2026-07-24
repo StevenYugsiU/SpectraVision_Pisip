@@ -4,18 +4,26 @@ import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IEntregaUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.Entrega;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.IClienteRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IEntregaRepositorio;
 
 public class EntregaUseCaseImpl implements IEntregaUseCase {
 
 	private final IEntregaRepositorio repositorio;
+	private final IClienteRepositorio clienteRepositorio;
 
-	public EntregaUseCaseImpl(IEntregaRepositorio repositorio) {
+	public EntregaUseCaseImpl(IEntregaRepositorio repositorio, IClienteRepositorio clienteRepositorio) {
 		this.repositorio = repositorio;
+		this.clienteRepositorio = clienteRepositorio;
 	}
 
 	@Override
 	public Entrega guardar(Entrega nuevaEntrega) {
+
+		clienteRepositorio.buscarPorId(nuevaEntrega.getIdCliente())
+				.orElseThrow(() -> new RuntimeException(
+						"No se encontro el cliente con id " + nuevaEntrega.getIdCliente()));
+
 		return repositorio.guardar(nuevaEntrega);
 	}
 

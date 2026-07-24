@@ -1,5 +1,6 @@
 package com.uisrael.spectraVisionPisip.dominio.repositorio;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,4 +18,6 @@ public interface ISeguimientoRepositorio {
 	void eliminar(int idSeguimiento);
 
 	List<Seguimiento> buscarPorIdEntrega(int idEntrega);
+
+	List<Seguimiento> buscarProximos(Date desde, Date hasta);
 }

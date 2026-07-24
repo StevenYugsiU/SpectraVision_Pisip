@@ -17,7 +17,34 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
 	@Override
 	public Usuario guardar(Usuario nuevoUsuario) {
+
+		repositorio.buscarPorUsuario(nuevoUsuario.getUsuario()).ifPresent(existente -> {
+			throw new RuntimeException("Ya existe un usuario registrado con el nombre de usuario "
+					+ nuevoUsuario.getUsuario());
+		});
+
 		return repositorio.guardar(nuevoUsuario);
+	}
+
+	@Override
+	public Usuario actualizar(int idUsuario, Usuario usuarioActualizado) {
+
+		Usuario existente = buscarPorId(idUsuario);
+
+		repositorio.buscarPorUsuario(usuarioActualizado.getUsuario()).ifPresent(otro -> {
+			if (otro.getIdUsuario() != idUsuario) {
+				throw new RuntimeException(
+						"Ya existe otro usuario registrado con el nombre de usuario " + usuarioActualizado.getUsuario());
+			}
+		});
+
+		existente.setNombres(usuarioActualizado.getNombres());
+		existente.setApellidos(usuarioActualizado.getApellidos());
+		existente.setUsuario(usuarioActualizado.getUsuario());
+		existente.setContrasena(usuarioActualizado.getContrasena());
+		existente.setEstado(usuarioActualizado.getEstado());
+
+		return repositorio.guardar(existente);
 	}
 
 	@Override
