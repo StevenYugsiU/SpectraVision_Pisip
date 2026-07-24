@@ -4,17 +4,17 @@ import java.time.LocalTime;
 import java.util.Date;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class CitaRequestDto {
-	
+
 	private int idCita;
-	@NotBlank
 	private int idCliente;
-	@NotBlank
+	@NotNull
 	private Date fecha;
-	@NotBlank
+	@NotNull
 	private LocalTime hora;
 	@NotBlank
 	private String tipoCita;

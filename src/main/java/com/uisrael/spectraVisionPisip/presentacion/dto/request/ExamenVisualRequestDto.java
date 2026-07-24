@@ -3,15 +3,15 @@ package com.uisrael.spectraVisionPisip.presentacion.dto.request;
 import java.util.Date;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 public class ExamenVisualRequestDto {
-	
+
 	private int idExamen;
-	@NotBlank
 	private int idHistoria;
-	@NotBlank
+	@NotNull
 	private Date fechaExamen;
 	@NotBlank
 	private String ultimoControlVisual;

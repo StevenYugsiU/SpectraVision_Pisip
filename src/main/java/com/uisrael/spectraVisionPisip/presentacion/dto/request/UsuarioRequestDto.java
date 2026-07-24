@@ -1,6 +1,7 @@
 package com.uisrael.spectraVisionPisip.presentacion.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -15,6 +16,6 @@ public class UsuarioRequestDto {
 	private String usuario;
 	@NotBlank
 	private String contrasena;
-	@NotBlank
+	@NotNull
 	private Boolean estado;
 }
