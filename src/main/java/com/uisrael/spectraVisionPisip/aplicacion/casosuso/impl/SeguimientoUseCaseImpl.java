@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ISeguimientoUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.Seguimiento;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IEntregaRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ISeguimientoRepositorio;
 
@@ -25,9 +26,11 @@ public class SeguimientoUseCaseImpl implements ISeguimientoUseCase {
 	@Override
 	public Seguimiento guardar(Seguimiento nuevoSeguimiento) {
 
-		entregaRepositorio.buscarPorId(nuevoSeguimiento.getIdEntrega())
-				.orElseThrow(() -> new RuntimeException(
-						"No se encontro la entrega con id " + nuevoSeguimiento.getIdEntrega()));
+		int idEntrega = nuevoSeguimiento.getFkEntrega().getIdEntrega();
+
+		entregaRepositorio.buscarPorId(idEntrega)
+				.orElseThrow(() -> new RecursoNoEncontradoException(
+						"No se encontro la entrega con id " + idEntrega));
 
 		return repositorio.guardar(nuevoSeguimiento);
 	}
@@ -46,7 +49,7 @@ public class SeguimientoUseCaseImpl implements ISeguimientoUseCase {
 
 	@Override
 	public Seguimiento buscarPorId(int idSeguimiento) {
-		return repositorio.buscarPorId(idSeguimiento).orElseThrow(() -> new RuntimeException("No se encontro Rol"));
+		return repositorio.buscarPorId(idSeguimiento).orElseThrow(() -> new RecursoNoEncontradoException("No se encontro Seguimiento"));
 	}
 
 	@Override

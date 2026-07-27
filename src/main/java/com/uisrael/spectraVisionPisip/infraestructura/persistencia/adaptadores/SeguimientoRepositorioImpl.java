@@ -49,7 +49,7 @@ public class SeguimientoRepositorioImpl implements ISeguimientoRepositorio{
 
 	@Override
 	public List<Seguimiento> buscarPorIdEntrega(int idEntrega) {
-		return jpaRepositorio.findByFkEntregaEntityIdEntrega(idEntrega)
+		return jpaRepositorio.findByFkEntregaIdEntrega(idEntrega)
 				.stream()
 				.map(entityMapper :: toDomain)
 				.toList();

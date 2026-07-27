@@ -22,7 +22,7 @@ public class SeguimientoEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "fk_entrega")
-	private EntregaEntity fkEntregaEntity;
+	private EntregaEntity fkEntrega;
 
 	private Date fechaSeguimiento;
 	private String observaciones;

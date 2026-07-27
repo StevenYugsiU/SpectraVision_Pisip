@@ -44,9 +44,15 @@ public class UsuarioRolRepositorioImpl implements IUsuarioRolRepositorio{
 	@Override
 	public void eliminar(int idUsuarioRol) {
 		jpaRepositorio.deleteById(idUsuarioRol);
-		
+
 	}
 
-	
+	@Override
+	public List<UsuarioRol> buscarPorIdUsuario(int idUsuario) {
+		return jpaRepositorio.findByFkUsuarioEntityIdUsuario(idUsuario)
+				.stream()
+				.map(entityMapper :: toDomain)
+				.toList();
+	}
 
 }

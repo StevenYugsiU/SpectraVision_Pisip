@@ -14,4 +14,6 @@ public interface IUsuarioRolRepositorio {
 	List<UsuarioRol> listarTodos();
 
 	void eliminar(int idUsuarioRol);
+
+	List<UsuarioRol> buscarPorIdUsuario(int idUsuario);
 }

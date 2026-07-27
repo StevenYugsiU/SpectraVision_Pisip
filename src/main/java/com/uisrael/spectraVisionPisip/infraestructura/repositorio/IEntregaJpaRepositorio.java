@@ -8,6 +8,6 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.EntregaEn
 
 public interface IEntregaJpaRepositorio extends JpaRepository<EntregaEntity, Integer> {
 
-	List<EntregaEntity> findByFkClienteEntityIdCliente(int idCliente);
+	List<EntregaEntity> findByFkClienteIdCliente(int idCliente);
 
 }

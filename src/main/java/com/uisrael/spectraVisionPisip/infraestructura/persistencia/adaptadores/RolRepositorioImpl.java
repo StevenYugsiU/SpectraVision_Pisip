@@ -33,6 +33,12 @@ public class RolRepositorioImpl implements IRolRepositorio {
 	}
 
 	@Override
+	public Optional<Rol> buscarPorNombre(String nombre) {
+		return jpaRepositorio.findByNombre(nombre)
+				.map(entityMapper :: toDomain);
+	}
+
+	@Override
 	public List<Rol> listarTodos() {
 		return jpaRepositorio.findAll()
 				.stream()

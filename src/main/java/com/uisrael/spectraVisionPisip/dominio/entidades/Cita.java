@@ -1,43 +1,43 @@
 package com.uisrael.spectraVisionPisip.dominio.entidades;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 public class Cita {
 	private int idCita;
-	private int idCliente;
-	private Date fecha;
+	private Cliente fkCliente;
+	private LocalDate fecha;
 	private LocalTime hora;
 	private String tipoCita;
 	private String estado;
-	
-	
-	
-	public Cita(int idCita, int idCliente, Date fecha, LocalTime hora, String tipoCita, String estado) {
+
+
+
+	public Cita(int idCita, Cliente fkCliente, LocalDate fecha, LocalTime hora, String tipoCita, String estado) {
 		this.idCita = idCita;
-		this.idCliente = idCliente;
+		this.fkCliente = fkCliente;
 		this.fecha = fecha;
 		this.hora = hora;
 		this.tipoCita = tipoCita;
 		this.estado = estado;
 	}
-	
+
 	public int getIdCita() {
 		return idCita;
 	}
 	public void setIdCita(int idCita) {
 		this.idCita = idCita;
 	}
-	public int getIdCliente() {
-		return idCliente;
+	public Cliente getFkCliente() {
+		return fkCliente;
 	}
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setFkCliente(Cliente fkCliente) {
+		this.fkCliente = fkCliente;
 	}
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 	public LocalTime getHora() {
@@ -58,9 +58,5 @@ public class Cita {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
-	
-	
-	
+
 }

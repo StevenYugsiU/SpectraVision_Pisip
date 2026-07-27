@@ -5,7 +5,7 @@ import java.util.Date;
 public class ExamenVisualResponseDto {
 
 	private int idExamen;
-	private int idHistoria;
+	private HistoriaClinicaResponseDto fkHistoriaClinica;
 	private Date fechaExamen;
 	private String ultimoControlVisual;
 	private String motivoConsulta;
@@ -31,11 +31,11 @@ public class ExamenVisualResponseDto {
 	public void setIdExamen(int idExamen) {
 		this.idExamen = idExamen;
 	}
-	public int getIdHistoria() {
-		return idHistoria;
+	public HistoriaClinicaResponseDto getFkHistoriaClinica() {
+		return fkHistoriaClinica;
 	}
-	public void setIdHistoria(int idHistoria) {
-		this.idHistoria = idHistoria;
+	public void setFkHistoriaClinica(HistoriaClinicaResponseDto fkHistoriaClinica) {
+		this.fkHistoriaClinica = fkHistoriaClinica;
 	}
 	public Date getFechaExamen() {
 		return fechaExamen;

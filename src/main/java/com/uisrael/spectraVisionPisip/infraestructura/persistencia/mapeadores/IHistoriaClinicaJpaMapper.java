@@ -1,25 +1,16 @@
 package com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import com.uisrael.spectraVisionPisip.dominio.entidades.HistoriaClinica;
-import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.ClienteEntity;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.HistoriaClinicaEntity;
 
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = IClienteJpaMapper.class)
 public interface IHistoriaClinicaJpaMapper {
 
-	@Mapping(source = "fkClienteEntity.idCliente", target = "idCliente")
 	HistoriaClinica toDomain (HistoriaClinicaEntity entity);
 
-	@Mapping(source = "idCliente", target = "fkClienteEntity")
 	HistoriaClinicaEntity toEntity (HistoriaClinica historiaClinicaPojo);
 
-	default ClienteEntity map(int idCliente) {
-		ClienteEntity referencia = new ClienteEntity();
-		referencia.setIdCliente(idCliente);
-		return referencia;
-	}
 }

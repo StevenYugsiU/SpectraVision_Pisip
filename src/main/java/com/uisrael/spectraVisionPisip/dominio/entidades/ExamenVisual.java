@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ExamenVisual {
 	private int idExamen;
-	private int idHistoria;
+	private HistoriaClinica fkHistoriaClinica;
 	private Date fechaExamen;
 	private String ultimoControlVisual;
 	private String motivoConsulta;
@@ -28,16 +28,16 @@ public class ExamenVisual {
 	private String recomentaciones;
 	private String proximaConsulta;
 	private String diagnostico;
-	
-	
-	
-	
-	public ExamenVisual(int idExamen, int idHistoria, Date fechaExamen, String ultimoControlVisual,
+
+	public ExamenVisual() {
+	}
+
+	public ExamenVisual(int idExamen, HistoriaClinica fkHistoriaClinica, Date fechaExamen, String ultimoControlVisual,
 			String motivoConsulta, String avOd, String avOi, String sphOd, String cylOd, String ejeOd, String sphOi,
 			String cylOi, String ejeOi, String addValor, String dnp, String altura, String biomicroscopia,
 			String recomentaciones, String proximaConsulta, String diagnostico) {
 		this.idExamen = idExamen;
-		this.idHistoria = idHistoria;
+		this.fkHistoriaClinica = fkHistoriaClinica;
 		this.fechaExamen = fechaExamen;
 		this.ultimoControlVisual = ultimoControlVisual;
 		this.motivoConsulta = motivoConsulta;
@@ -57,19 +57,19 @@ public class ExamenVisual {
 		this.proximaConsulta = proximaConsulta;
 		this.diagnostico = diagnostico;
 	}
-	
-	
+
+
 	public int getIdExamen() {
 		return idExamen;
 	}
 	public void setIdExamen(int idExamen) {
 		this.idExamen = idExamen;
 	}
-	public int getIdHistoria() {
-		return idHistoria;
+	public HistoriaClinica getFkHistoriaClinica() {
+		return fkHistoriaClinica;
 	}
-	public void setIdHistoria(int idHistoria) {
-		this.idHistoria = idHistoria;
+	public void setFkHistoriaClinica(HistoriaClinica fkHistoriaClinica) {
+		this.fkHistoriaClinica = fkHistoriaClinica;
 	}
 	public Date getFechaExamen() {
 		return fechaExamen;
@@ -179,8 +179,5 @@ public class ExamenVisual {
 	public void setDiagnostico(String diagnostico) {
 		this.diagnostico = diagnostico;
 	}
-	
-	
-	
-	
+
 }

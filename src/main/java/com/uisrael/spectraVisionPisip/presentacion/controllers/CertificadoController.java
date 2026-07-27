@@ -121,7 +121,7 @@ public class CertificadoController {
 				contenido.newLineAtOffset(60, 700);
 				contenido.showText("Numero de certificado: " + certificado.getIdCertificado());
 				contenido.newLineAtOffset(0, -20);
-				contenido.showText("Examen visual asociado: " + certificado.getIdExamen());
+				contenido.showText("Examen visual asociado: " + certificado.getFkExamenVisual().getIdExamen());
 				contenido.newLineAtOffset(0, -20);
 				contenido.showText("Fecha de generacion: " + formatoFecha.format(certificado.getFechaGeneracion()));
 				contenido.newLineAtOffset(0, -20);

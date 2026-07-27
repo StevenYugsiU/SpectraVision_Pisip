@@ -1,21 +1,26 @@
 package com.uisrael.spectraVisionPisip.presentacion.dto.response;
 
+import java.util.List;
 
-
-public class UsuarioResponseDto {
+public class LoginResponseDto {
 
 	private int idUsuario;
+	private String usuario;
 	private String nombres;
 	private String apellidos;
-	private String usuario;
-	private Boolean estado;
-
+	private List<String> roles;
 
 	public int getIdUsuario() {
 		return idUsuario;
 	}
 	public void setIdUsuario(int idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
 	}
 	public String getNombres() {
 		return nombres;
@@ -29,18 +34,11 @@ public class UsuarioResponseDto {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-	public String getUsuario() {
-		return usuario;
+	public List<String> getRoles() {
+		return roles;
 	}
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
 	}
-	public Boolean getEstado() {
-		return estado;
-	}
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
-	
-	
+
 }

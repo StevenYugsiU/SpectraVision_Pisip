@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IEntregaUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.Entrega;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IClienteRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IEntregaRepositorio;
 
@@ -20,9 +21,11 @@ public class EntregaUseCaseImpl implements IEntregaUseCase {
 	@Override
 	public Entrega guardar(Entrega nuevaEntrega) {
 
-		clienteRepositorio.buscarPorId(nuevaEntrega.getIdCliente())
-				.orElseThrow(() -> new RuntimeException(
-						"No se encontro el cliente con id " + nuevaEntrega.getIdCliente()));
+		int idCliente = nuevaEntrega.getFkCliente().getIdCliente();
+
+		clienteRepositorio.buscarPorId(idCliente)
+				.orElseThrow(() -> new RecursoNoEncontradoException(
+						"No se encontro el cliente con id " + idCliente));
 
 		return repositorio.guardar(nuevaEntrega);
 	}
@@ -41,7 +44,7 @@ public class EntregaUseCaseImpl implements IEntregaUseCase {
 
 	@Override
 	public Entrega buscarPorId(int idEntrega) {
-		return repositorio.buscarPorId(idEntrega).orElseThrow(() -> new RuntimeException("No se encontro Entrega"));
+		return repositorio.buscarPorId(idEntrega).orElseThrow(() -> new RecursoNoEncontradoException("No se encontro Entrega"));
 	}
 
 	@Override

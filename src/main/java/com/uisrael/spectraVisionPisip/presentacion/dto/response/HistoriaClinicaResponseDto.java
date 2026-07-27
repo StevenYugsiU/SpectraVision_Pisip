@@ -5,23 +5,23 @@ import java.util.Date;
 public class HistoriaClinicaResponseDto {
 
 	private int idHistoriaClinica;
-	private int idCliente;
+	private ClienteResponseDto fkCliente;
 	private Date fechaApertura;
 	private String antecedentes;
 	private String observacionesGenerales;
 	private Boolean estado;
-	
+
 	public int getIdHistoriaClinica() {
 		return idHistoriaClinica;
 	}
 	public void setIdHistoriaClinica(int idHistoriaClinica) {
 		this.idHistoriaClinica = idHistoriaClinica;
 	}
-	public int getIdCliente() {
-		return idCliente;
+	public ClienteResponseDto getFkCliente() {
+		return fkCliente;
 	}
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setFkCliente(ClienteResponseDto fkCliente) {
+		this.fkCliente = fkCliente;
 	}
 	public Date getFechaApertura() {
 		return fechaApertura;
@@ -47,5 +47,5 @@ public class HistoriaClinicaResponseDto {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	
+
 }
