@@ -16,19 +16,20 @@ public class Cliente {
 	private Date fechaRegistro;
 	private Boolean estado;
 
-
+	public Cliente() {
+	}
 
 	public Cliente(int idCliente, String cedula, String nombres, String apellidos, Date fechaNacimiento, int edad,
 			String ocupacion, String celular, String correo, Date fechaRegistro, Boolean estado) {
 		this.idCliente = idCliente;
-		setCedula(cedula);
-		setNombres(nombres);
-		setApellidos(apellidos);
+		this.cedula = cedula;
+		this.nombres = nombres;
+		this.apellidos = apellidos;
 		this.fechaNacimiento = fechaNacimiento;
-		setEdad(edad);
+		this.edad = edad;
 		this.ocupacion = ocupacion;
 		this.celular = celular;
-		setCorreo(correo);
+		this.correo = correo;
 		this.fechaRegistro = fechaRegistro;
 		this.estado = estado;
 	}
@@ -43,27 +44,18 @@ public class Cliente {
 		return cedula;
 	}
 	public void setCedula(String cedula) {
-		if (cedula == null || cedula.isBlank()) {
-			throw new IllegalArgumentException("La cedula es obligatoria");
-		}
 		this.cedula = cedula;
 	}
 	public String getNombres() {
 		return nombres;
 	}
 	public void setNombres(String nombres) {
-		if (nombres == null || nombres.isBlank()) {
-			throw new IllegalArgumentException("Los nombres son obligatorios");
-		}
 		this.nombres = nombres;
 	}
 	public String getApellidos() {
 		return apellidos;
 	}
 	public void setApellidos(String apellidos) {
-		if (apellidos == null || apellidos.isBlank()) {
-			throw new IllegalArgumentException("Los apellidos son obligatorios");
-		}
 		this.apellidos = apellidos;
 	}
 	public Date getFechaNacimiento() {
@@ -76,9 +68,6 @@ public class Cliente {
 		return edad;
 	}
 	public void setEdad(int edad) {
-		if (edad < 0) {
-			throw new IllegalArgumentException("La edad no puede ser negativa");
-		}
 		this.edad = edad;
 	}
 	public String getOcupacion() {
@@ -97,9 +86,6 @@ public class Cliente {
 		return correo;
 	}
 	public void setCorreo(String correo) {
-		if (correo == null || !correo.contains("@")) {
-			throw new IllegalArgumentException("El correo no tiene un formato valido");
-		}
 		this.correo = correo;
 	}
 	public Date getFechaRegistro() {
@@ -114,7 +100,5 @@ public class Cliente {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-
-
 
 }

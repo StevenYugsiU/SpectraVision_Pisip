@@ -4,21 +4,21 @@ import java.util.Date;
 
 public class CertificadoResponseDto {
 	private int idCertificado;
-	private int idExamen;
+	private ExamenVisualResponseDto fkExamenVisual;
 	private Date fechaGeneracion;
 	private String observaciones;
-	
+
 	public int getIdCertificado() {
 		return idCertificado;
 	}
 	public void setIdCertificado(int idCertificado) {
 		this.idCertificado = idCertificado;
 	}
-	public int getIdExamen() {
-		return idExamen;
+	public ExamenVisualResponseDto getFkExamenVisual() {
+		return fkExamenVisual;
 	}
-	public void setIdExamen(int idExamen) {
-		this.idExamen = idExamen;
+	public void setFkExamenVisual(ExamenVisualResponseDto fkExamenVisual) {
+		this.fkExamenVisual = fkExamenVisual;
 	}
 	public Date getFechaGeneracion() {
 		return fechaGeneracion;
@@ -32,7 +32,7 @@ public class CertificadoResponseDto {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
-	
-	
+
+
 
 }

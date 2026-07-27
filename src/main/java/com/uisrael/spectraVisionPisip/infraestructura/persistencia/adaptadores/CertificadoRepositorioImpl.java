@@ -50,7 +50,7 @@ public class CertificadoRepositorioImpl implements ICertificadoRepositorio{
 
 	@Override
 	public List<Certificado> buscarPorIdExamen(int idExamen) {
-		return jpaRepositorio.findByFkExamenVisualEntityIdExamen(idExamen)
+		return jpaRepositorio.findByFkExamenVisualIdExamen(idExamen)
 				.stream()
 				.map(entityMapper :: toDomain)
 				.toList();

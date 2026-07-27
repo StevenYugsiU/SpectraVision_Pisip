@@ -1,8 +1,9 @@
 package com.uisrael.spectraVisionPisip.presentacion.dto.request;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -11,9 +12,10 @@ import lombok.Data;
 public class CitaRequestDto {
 
 	private int idCita;
+	@Min(value = 1, message = "Debe seleccionar un cliente")
 	private int idCliente;
 	@NotNull
-	private Date fecha;
+	private LocalDate fecha;
 	@NotNull
 	private LocalTime hora;
 	@NotBlank

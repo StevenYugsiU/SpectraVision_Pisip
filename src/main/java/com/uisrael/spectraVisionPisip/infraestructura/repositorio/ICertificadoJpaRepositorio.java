@@ -8,6 +8,6 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.Certifica
 
 public interface ICertificadoJpaRepositorio  extends JpaRepository<CertificadoEntity, Integer>{
 
-	List<CertificadoEntity> findByFkExamenVisualEntityIdExamen(int idExamen);
+	List<CertificadoEntity> findByFkExamenVisualIdExamen(int idExamen);
 
 }

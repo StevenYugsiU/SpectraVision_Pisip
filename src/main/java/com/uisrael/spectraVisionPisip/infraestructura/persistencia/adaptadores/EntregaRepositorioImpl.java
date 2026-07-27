@@ -47,7 +47,7 @@ public class EntregaRepositorioImpl implements IEntregaRepositorio {
 
 	@Override
 	public List<Entrega> buscarPorIdCliente(int idCliente) {
-		return jpaRepositorio.findByFkClienteEntityIdCliente(idCliente)
+		return jpaRepositorio.findByFkClienteIdCliente(idCliente)
 				.stream()
 				.map(entityMapper :: toDomain)
 				.toList();

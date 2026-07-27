@@ -12,6 +12,8 @@ public interface IRolRepositorio {
 
 	Optional<Rol> buscarPorId(int idRol);
 
+	Optional<Rol> buscarPorNombre(String nombre);
+
 	List<Rol> listarTodos();
 
 	void eliminar(int idRol);

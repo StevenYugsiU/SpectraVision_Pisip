@@ -8,6 +8,6 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.HistoriaC
 
 public interface IHistoriaClinicaJpaRepositorio extends JpaRepository <HistoriaClinicaEntity, Integer> {
 
-	Optional<HistoriaClinicaEntity> findByFkClienteEntityIdCliente(int idCliente);
+	Optional<HistoriaClinicaEntity> findByFkClienteIdCliente(int idCliente);
 	
 }

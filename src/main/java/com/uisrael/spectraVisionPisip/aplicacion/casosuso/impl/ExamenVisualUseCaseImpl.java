@@ -5,6 +5,8 @@ import java.util.List;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IExamenVisualUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.ExamenVisual;
 import com.uisrael.spectraVisionPisip.dominio.entidades.HistoriaClinica;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.ReglaNegocioException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IExamenVisualRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IHistoriaClinicaRepositorio;
 
@@ -23,18 +25,20 @@ public class ExamenVisualUseCaseImpl implements IExamenVisualUseCase{
 	@Override
 	public ExamenVisual guardar(ExamenVisual nuevoExamenVisual) {
 
-		HistoriaClinica historia = historiaClinicaRepositorio.buscarPorId(nuevoExamenVisual.getIdHistoria())
-				.orElseThrow(() -> new RuntimeException(
-						"No se encontro la historia clinica con id " + nuevoExamenVisual.getIdHistoria()));
+		int idHistoria = nuevoExamenVisual.getFkHistoriaClinica().getIdHistoriaClinica();
+
+		HistoriaClinica historia = historiaClinicaRepositorio.buscarPorId(idHistoria)
+				.orElseThrow(() -> new RecursoNoEncontradoException(
+						"No se encontro la historia clinica con id " + idHistoria));
 
 		if (!Boolean.TRUE.equals(historia.getEstado())) {
-			throw new RuntimeException(
-					"La historia clinica con id " + nuevoExamenVisual.getIdHistoria() + " no esta activa");
+			throw new ReglaNegocioException(
+					"La historia clinica con id " + idHistoria + " no esta activa");
 		}
 
 		return repositorio.guardar(nuevoExamenVisual);
 	}
-	
+
 	@Override
 	public ExamenVisual actualizar(int idExamenVisual,
 			ExamenVisual examenActualizado) {
@@ -67,11 +71,11 @@ public class ExamenVisualUseCaseImpl implements IExamenVisualUseCase{
 
 		return repositorio.guardar(existente);
 	}
-	
+
 
 	@Override
 	public ExamenVisual buscarPorId(int idExamenVisual) {
-		return repositorio.buscarPorId(idExamenVisual).orElseThrow(() -> new RuntimeException("No se encontro Examen Visual"));
+		return repositorio.buscarPorId(idExamenVisual).orElseThrow(() -> new RecursoNoEncontradoException("No se encontro Examen Visual"));
 	}
 
 	@Override
@@ -82,9 +86,9 @@ public class ExamenVisualUseCaseImpl implements IExamenVisualUseCase{
 	@Override
 	public void eliminar(int idExamenVisual) {
 		repositorio.eliminar(idExamenVisual);
-		
+
 	}
-	
+
 	@Override
 	public List<ExamenVisual> buscarPorIdHistoria(int idHistoriaClinica) {
 		return repositorio.buscarPorIdHistoria(idHistoriaClinica);

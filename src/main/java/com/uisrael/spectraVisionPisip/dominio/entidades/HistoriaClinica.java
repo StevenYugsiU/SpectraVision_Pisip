@@ -3,21 +3,23 @@ package com.uisrael.spectraVisionPisip.dominio.entidades;
 import java.util.Date;
 
 public class HistoriaClinica {
-	
+
 	private int idHistoriaClinica;
-	private int idCliente;
+	private Cliente fkCliente;
 	private Date fechaApertura;
 	private String antecedentes;
 	private String observacionesGenerales;
 	private Boolean estado;
-	
-	
-	public HistoriaClinica(int idHistoriaClinica, int idCliente, Date fechaApertura, String antecedentes,
+
+	public HistoriaClinica() {
+	}
+
+	public HistoriaClinica(int idHistoriaClinica, Cliente fkCliente, Date fechaApertura, String antecedentes,
 			String observacionesGenerales, Boolean estado) {
 		this.idHistoriaClinica = idHistoriaClinica;
-		this.idCliente = idCliente;
-		setFechaApertura(fechaApertura);
-		setAntecedentes(antecedentes);
+		this.fkCliente = fkCliente;
+		this.fechaApertura = fechaApertura;
+		this.antecedentes = antecedentes;
 		this.observacionesGenerales = observacionesGenerales;
 		this.estado = estado;
 	}
@@ -33,13 +35,13 @@ public class HistoriaClinica {
 	}
 
 
-	public int getIdCliente() {
-		return idCliente;
+	public Cliente getFkCliente() {
+		return fkCliente;
 	}
 
 
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setFkCliente(Cliente fkCliente) {
+		this.fkCliente = fkCliente;
 	}
 
 
@@ -49,9 +51,6 @@ public class HistoriaClinica {
 
 
 	public void setFechaApertura(Date fechaApertura) {
-		if (fechaApertura == null) {
-			throw new IllegalArgumentException("La fecha de apertura es obligatoria");
-		}
 		this.fechaApertura = fechaApertura;
 	}
 
@@ -62,9 +61,6 @@ public class HistoriaClinica {
 
 
 	public void setAntecedentes(String antecedentes) {
-		if (antecedentes == null || antecedentes.isBlank()) {
-			throw new IllegalArgumentException("Los antecedentes son obligatorios");
-		}
 		this.antecedentes = antecedentes;
 	}
 
@@ -87,12 +83,5 @@ public class HistoriaClinica {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	
-	
-	
-	
-	
 
-	
-	
 }

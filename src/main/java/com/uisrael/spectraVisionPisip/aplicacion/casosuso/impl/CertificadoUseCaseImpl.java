@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICertificadoUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.Certificado;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ICertificadoRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IExamenVisualRepositorio;
 
@@ -21,9 +22,11 @@ public class CertificadoUseCaseImpl implements ICertificadoUseCase{
 	@Override
 	public Certificado guardar(Certificado nuevoCertificado) {
 
-		examenVisualRepositorio.buscarPorId(nuevoCertificado.getIdExamen())
-				.orElseThrow(() -> new RuntimeException(
-						"No se encontro el examen visual con id " + nuevoCertificado.getIdExamen()));
+		int idExamen = nuevoCertificado.getFkExamenVisual().getIdExamen();
+
+		examenVisualRepositorio.buscarPorId(idExamen)
+				.orElseThrow(() -> new RecursoNoEncontradoException(
+						"No se encontro el examen visual con id " + idExamen));
 
 		return repositorio.guardar(nuevoCertificado);
 	}
@@ -41,7 +44,7 @@ public class CertificadoUseCaseImpl implements ICertificadoUseCase{
 
 	@Override
 	public Certificado buscarPorId(int idCertificado) {
-		return repositorio.buscarPorId(idCertificado).orElseThrow(() -> new RuntimeException("No se encontro Historia Certificado"));
+		return repositorio.buscarPorId(idCertificado).orElseThrow(() -> new RecursoNoEncontradoException("No se encontro Historia Certificado"));
 	}
 
 	@Override

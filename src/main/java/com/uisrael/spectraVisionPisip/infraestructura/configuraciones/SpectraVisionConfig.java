@@ -2,7 +2,10 @@ package com.uisrael.spectraVisionPisip.infraestructura.configuraciones;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IAuthUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICertificadoUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICitaUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IClienteUseCase;
@@ -13,6 +16,7 @@ import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IRolUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ISeguimientoUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IUsuarioRolUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IUsuarioUseCase;
+import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.AuthUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.CertificadoUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.CitaUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.ClienteUseCaseImpl;
@@ -66,7 +70,12 @@ import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IUsuarioRolJpa
 
 @Configuration
 public class SpectraVisionConfig {
-	
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
 	/*HistoriaClinica*/
 	@Bean
 	IHistoriaClinicaRepositorio historiaClinicaRepositorio(IHistoriaClinicaJpaRepositorio jpaRepositorio, IHistoriaClinicaJpaMapper mapper) {
@@ -108,20 +117,26 @@ public class SpectraVisionConfig {
 	}
 	
 	@Bean
-	IUsuarioUseCase usuarioUseCase(IUsuarioRepositorio repo) {
-		return new UsuarioUseCaseImpl(repo);
+	IUsuarioUseCase usuarioUseCase(IUsuarioRepositorio repo, PasswordEncoder passwordEncoder) {
+		return new UsuarioUseCaseImpl(repo, passwordEncoder);
 	}
-	
-	
+
+
 	/*UsuarioRol*/
 	@Bean
 	IUsuarioRolRepositorio usuarioRolRepositorio(IUsuarioRolJpaRepositorio jpaRepositorio, IUsuarioRolJpaMapper mapper) {
 		return new UsuarioRolRepositorioImpl(jpaRepositorio, mapper);
 	}
-	
+
 	@Bean
 	IUsuarioRolUseCase usuarioRolUseCase(IUsuarioRolRepositorio repo, IUsuarioRepositorio usuarioRepositorio, IRolRepositorio rolRepositorio) {
 		return new UsuarioRolUseCaseImpl(repo, usuarioRepositorio, rolRepositorio);
+	}
+
+	@Bean
+	IAuthUseCase authUseCase(IUsuarioRepositorio usuarioRepositorio, IUsuarioRolRepositorio usuarioRolRepositorio,
+			IRolRepositorio rolRepositorio, PasswordEncoder passwordEncoder) {
+		return new AuthUseCaseImpl(usuarioRepositorio, usuarioRolRepositorio, rolRepositorio, passwordEncoder);
 	}
 	
 	

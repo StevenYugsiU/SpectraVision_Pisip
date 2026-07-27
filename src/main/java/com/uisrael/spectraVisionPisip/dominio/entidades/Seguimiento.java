@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class Seguimiento {
 	private int idSeguimiento;
-	private int idEntrega;
+	private Entrega fkEntrega;
 	private Date fechaSeguimiento;
 	private String observaciones;
 	private String estado;
 
-	public Seguimiento(int idSeguimiento, int idEntrega, Date fechaSeguimiento, String observaciones,
+	public Seguimiento(int idSeguimiento, Entrega fkEntrega, Date fechaSeguimiento, String observaciones,
 			String estado) {
 		this.idSeguimiento = idSeguimiento;
-		this.idEntrega = idEntrega;
+		this.fkEntrega = fkEntrega;
 		this.fechaSeguimiento = fechaSeguimiento;
 		this.observaciones = observaciones;
 		this.estado = estado;
@@ -24,11 +24,11 @@ public class Seguimiento {
 	public void setIdSeguimiento(int idSeguimiento) {
 		this.idSeguimiento = idSeguimiento;
 	}
-	public int getIdEntrega() {
-		return idEntrega;
+	public Entrega getFkEntrega() {
+		return fkEntrega;
 	}
-	public void setIdEntrega(int idEntrega) {
-		this.idEntrega = idEntrega;
+	public void setFkEntrega(Entrega fkEntrega) {
+		this.fkEntrega = fkEntrega;
 	}
 	public Date getFechaSeguimiento() {
 		return fechaSeguimiento;

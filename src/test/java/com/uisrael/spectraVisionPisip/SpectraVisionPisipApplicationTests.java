@@ -1,5 +1,6 @@
 package com.uisrael.spectraVisionPisip;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -82,7 +83,7 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Historia Clinica
 		HistoriaClinicaEntity historiaNew = new HistoriaClinicaEntity();
-		historiaNew.setFkClienteEntity(cliNew);
+		historiaNew.setFkCliente(cliNew);
 		historiaNew.setFechaApertura(new Date());
 		historiaNew.setAntecedentes("Miopia");
 		historiaNew.setObservacionesGenerales("Primera historia clínica registrada en el sistema.");
@@ -92,7 +93,7 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Examen Visual
 		ExamenVisualEntity examenNew = new ExamenVisualEntity();
-		examenNew.setFkHistoriaClinicaEntity(historiaNew);
+		examenNew.setFkHistoriaClinica(historiaNew);
 		examenNew.setFechaExamen(new Date());
 		examenNew.setUltimoControlVisual("Hace 1 año");
 		examenNew.setMotivoConsulta("Vision borrosa de lejos");
@@ -116,7 +117,7 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Certificado
 		CertificadoEntity certificadoNew = new CertificadoEntity();
-		certificadoNew.setFkExamenVisualEntity(examenNew);
+		certificadoNew.setFkExamenVisual(examenNew);
 		certificadoNew.setFechaGeneracion(new Date());
 		certificadoNew.setObservaciones("Paciente apto para uso de lentes correctivos.");	
 		repoCertificado.save(certificadoNew);
@@ -124,8 +125,8 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Cita
 		CitaEntity citaNew = new CitaEntity();
-		citaNew.setFkClienteEntity(cliNew);
-		citaNew.setFecha(new Date());
+		citaNew.setFkCliente(cliNew);
+		citaNew.setFecha(LocalDate.now());
 		citaNew.setTipoCita("Examen Visual");
 		citaNew.setEstado("Agendada");
 		repoCita.save(citaNew);
@@ -133,7 +134,7 @@ class SpectraVisionPisipApplicationTests {
 		
 		//Entrega
 		EntregaEntity entregaNew = new EntregaEntity();
-		entregaNew.setFkClienteEntity(cliNew);
+		entregaNew.setFkCliente(cliNew);
 		entregaNew.setFechaEntrega(new Date());
 		entregaNew.setObservaciones("Entrega de lentes correctivos al cliente.");
 		entregaNew.setEstado("Entregado");
@@ -142,7 +143,7 @@ class SpectraVisionPisipApplicationTests {
 
 		//Seguimiento
 		SeguimientoEntity segNew = new SeguimientoEntity();
-		segNew.setFkEntregaEntity(entregaNew);
+		segNew.setFkEntrega(entregaNew);
 		segNew.setFechaSeguimiento(new Date());
 		segNew.setObservaciones("Cliente indica buena adaptación a los lentes entregados.");
 		segNew.setEstado("Completado");

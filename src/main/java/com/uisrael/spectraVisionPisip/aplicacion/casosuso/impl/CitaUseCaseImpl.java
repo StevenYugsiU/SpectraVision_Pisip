@@ -1,11 +1,13 @@
 package com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICitaUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.Cita;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.ReglaNegocioException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ICitaRepositorio;
 
 public class CitaUseCaseImpl implements ICitaUseCase{
@@ -41,13 +43,13 @@ public class CitaUseCaseImpl implements ICitaUseCase{
 		return repositorio.guardar(existente);
 	}
 
-	private void validarDisponibilidad(Date fecha, LocalTime hora, int idCitaExcluir) {
+	private void validarDisponibilidad(LocalDate fecha, LocalTime hora, int idCitaExcluir) {
 		repositorio.buscarPorFechaYHora(fecha, hora).stream()
 				.filter(cita -> cita.getIdCita() != idCitaExcluir)
 				.filter(cita -> !"Cancelada".equalsIgnoreCase(cita.getEstado()))
 				.findAny()
 				.ifPresent(cita -> {
-					throw new RuntimeException("El horario seleccionado ya se encuentra ocupado");
+					throw new ReglaNegocioException("El horario seleccionado ya se encuentra ocupado");
 				});
 	}
 
@@ -60,7 +62,7 @@ public class CitaUseCaseImpl implements ICitaUseCase{
 
 	@Override
 	public Cita buscarPorId(int idCita) {
-		return repositorio.buscarPorId(idCita).orElseThrow(() -> new RuntimeException("No se encontro Cita Medica"));
+		return repositorio.buscarPorId(idCita).orElseThrow(() -> new RecursoNoEncontradoException("No se encontro Cita Medica"));
 	}
 
 	@Override
@@ -80,7 +82,7 @@ public class CitaUseCaseImpl implements ICitaUseCase{
 	}
 
 	@Override
-	public List<Cita> buscarPorFecha(Date fecha) {
+	public List<Cita> buscarPorFecha(LocalDate fecha) {
 		return repositorio.buscarPorFecha(fecha);
 	}
 

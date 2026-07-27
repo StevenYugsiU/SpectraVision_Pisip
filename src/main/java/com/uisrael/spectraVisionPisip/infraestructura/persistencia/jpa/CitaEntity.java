@@ -1,7 +1,7 @@
 package com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,9 +23,9 @@ public class CitaEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "fk_cliente")
-	private ClienteEntity fkClienteEntity;
+	private ClienteEntity fkCliente;
 
-	private Date fecha;
+	private LocalDate fecha;
 	private LocalTime hora;
 	private String tipoCita;
 	private String estado;

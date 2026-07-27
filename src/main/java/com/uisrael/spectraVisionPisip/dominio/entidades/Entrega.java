@@ -5,14 +5,17 @@ import java.util.Date;
 public class Entrega {
 
 	private int idEntrega;
-	private int idCliente;
+	private Cliente fkCliente;
 	private Date fechaEntrega;
 	private String observaciones;
 	private String estado;
 
-	public Entrega(int idEntrega, int idCliente, Date fechaEntrega, String observaciones, String estado) {
+	public Entrega() {
+	}
+
+	public Entrega(int idEntrega, Cliente fkCliente, Date fechaEntrega, String observaciones, String estado) {
 		this.idEntrega = idEntrega;
-		this.idCliente = idCliente;
+		this.fkCliente = fkCliente;
 		this.fechaEntrega = fechaEntrega;
 		this.observaciones = observaciones;
 		this.estado = estado;
@@ -24,11 +27,11 @@ public class Entrega {
 	public void setIdEntrega(int idEntrega) {
 		this.idEntrega = idEntrega;
 	}
-	public int getIdCliente() {
-		return idCliente;
+	public Cliente getFkCliente() {
+		return fkCliente;
 	}
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setFkCliente(Cliente fkCliente) {
+		this.fkCliente = fkCliente;
 	}
 	public Date getFechaEntrega() {
 		return fechaEntrega;
