@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IUsuarioRolUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.UsuarioRol;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.ReglaNegocioException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IRolRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRolRepositorio;
@@ -26,11 +28,18 @@ public class UsuarioRolUseCaseImpl implements IUsuarioRolUseCase {
 	public UsuarioRol guardar(UsuarioRol nuevoUsuarioRol) {
 
 		usuarioRepositorio.buscarPorId(nuevoUsuarioRol.getIdUsuario())
-				.orElseThrow(() -> new RuntimeException(
+				.orElseThrow(() -> new RecursoNoEncontradoException(
 						"No se encontro el usuario con id " + nuevoUsuarioRol.getIdUsuario()));
 
 		rolRepositorio.buscarPorId(nuevoUsuarioRol.getIdRol())
-				.orElseThrow(() -> new RuntimeException("No se encontro el rol con id " + nuevoUsuarioRol.getIdRol()));
+				.orElseThrow(() -> new RecursoNoEncontradoException("No se encontro el rol con id " + nuevoUsuarioRol.getIdRol()));
+
+		repositorio.listarTodos().stream()
+				.filter(ur -> ur.getIdUsuario() == nuevoUsuarioRol.getIdUsuario() && ur.getIdRol() == nuevoUsuarioRol.getIdRol())
+				.findAny()
+				.ifPresent(ur -> {
+					throw new ReglaNegocioException("El usuario ya tiene asignado ese rol");
+				});
 
 		return repositorio.guardar(nuevoUsuarioRol);
 	}
@@ -41,7 +50,7 @@ public class UsuarioRolUseCaseImpl implements IUsuarioRolUseCase {
 		UsuarioRol existente = buscarPorId(idUsuarioRol);
 
 		rolRepositorio.buscarPorId(usuarioRolActualizado.getIdRol())
-				.orElseThrow(() -> new RuntimeException(
+				.orElseThrow(() -> new RecursoNoEncontradoException(
 						"No se encontro el rol con id " + usuarioRolActualizado.getIdRol()));
 
 		existente.setIdRol(usuarioRolActualizado.getIdRol());
@@ -51,7 +60,7 @@ public class UsuarioRolUseCaseImpl implements IUsuarioRolUseCase {
 
 	@Override
 	public UsuarioRol buscarPorId(int idUsuarioRol) {
-		return repositorio.buscarPorId(idUsuarioRol).orElseThrow(() -> new RuntimeException("No se encontro UsuarioRol"));
+		return repositorio.buscarPorId(idUsuarioRol).orElseThrow(() -> new RecursoNoEncontradoException("No se encontro UsuarioRol"));
 
 	}
 

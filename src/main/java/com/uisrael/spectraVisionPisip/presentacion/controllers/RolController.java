@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -50,6 +51,16 @@ public class RolController {
 		rolUseCase.eliminar(idRol);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
+
+	@GetMapping("/{idRol}")
+	public RolResponseDto buscarPorId(@PathVariable int idRol) {
+		return mapper.toResponseDto(rolUseCase.buscarPorId(idRol));
+	}
+
+	@PutMapping("/{idRol}")
+	public RolResponseDto actualizar(@PathVariable int idRol, @Valid @RequestBody RolRequestDto requestRol) {
+		return mapper.toResponseDto(rolUseCase.actualizar(idRol, mapper.toDomain(requestRol)));
+	}
+
+
 }

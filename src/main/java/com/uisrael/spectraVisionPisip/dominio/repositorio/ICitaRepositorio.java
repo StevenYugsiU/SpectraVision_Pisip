@@ -1,7 +1,7 @@
 package com.uisrael.spectraVisionPisip.dominio.repositorio;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +19,7 @@ public interface ICitaRepositorio {
 
 	List<Cita> buscarPorIdCliente(int idCliente);
 
-	List<Cita> buscarPorFechaYHora(Date fecha, LocalTime hora);
+	List<Cita> buscarPorFechaYHora(LocalDate fecha, LocalTime hora);
 
-	List<Cita> buscarPorFecha(Date fecha);
+	List<Cita> buscarPorFecha(LocalDate fecha);
 }

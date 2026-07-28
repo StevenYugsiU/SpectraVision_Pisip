@@ -46,6 +46,11 @@ public class UsuarioRolController {
 				.map(mapper::toResponseDto).toList();
 	}
 	
+	@GetMapping("/{idUsuarioRol}")
+	public UsuarioRolResponseDto buscarPorId(@PathVariable int idUsuarioRol) {
+		return mapper.toResponseDto(usuarioRolUseCase.buscarPorId(idUsuarioRol));
+	}
+
 	@DeleteMapping("/{idUsuarioRol}")
 	public ResponseEntity<Void> elimnar(@PathVariable int idUsuarioRol){
 		usuarioRolUseCase.eliminar(idUsuarioRol);

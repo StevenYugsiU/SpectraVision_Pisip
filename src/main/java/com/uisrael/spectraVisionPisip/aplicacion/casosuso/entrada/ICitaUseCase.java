@@ -1,6 +1,6 @@
 package com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -20,7 +20,7 @@ public interface ICitaUseCase {
 
 	List<Cita> buscarPorIdCliente(int idCliente);
 
-	List<Cita> buscarPorFecha(Date fecha);
+	List<Cita> buscarPorFecha(LocalDate fecha);
 
 	Cita cancelar(int idCita);
 

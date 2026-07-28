@@ -2,26 +2,38 @@ package com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IUsuarioUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.Usuario;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.ReglaNegocioException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRepositorio;
 
 public class UsuarioUseCaseImpl implements IUsuarioUseCase {
-	
-	private final IUsuarioRepositorio repositorio;
-	
 
-	public UsuarioUseCaseImpl(IUsuarioRepositorio repositorio) {
+	private final IUsuarioRepositorio repositorio;
+	private final PasswordEncoder passwordEncoder;
+
+
+	public UsuarioUseCaseImpl(IUsuarioRepositorio repositorio, PasswordEncoder passwordEncoder) {
 		this.repositorio = repositorio;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
 	public Usuario guardar(Usuario nuevoUsuario) {
 
+		if (nuevoUsuario.getContrasena() == null || nuevoUsuario.getContrasena().isBlank()) {
+			throw new IllegalArgumentException("La contrasena es obligatoria");
+		}
+
 		repositorio.buscarPorUsuario(nuevoUsuario.getUsuario()).ifPresent(existente -> {
-			throw new RuntimeException("Ya existe un usuario registrado con el nombre de usuario "
+			throw new ReglaNegocioException("Ya existe un usuario registrado con el nombre de usuario "
 					+ nuevoUsuario.getUsuario());
 		});
+
+		nuevoUsuario.setContrasena(passwordEncoder.encode(nuevoUsuario.getContrasena()));
 
 		return repositorio.guardar(nuevoUsuario);
 	}
@@ -33,7 +45,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
 		repositorio.buscarPorUsuario(usuarioActualizado.getUsuario()).ifPresent(otro -> {
 			if (otro.getIdUsuario() != idUsuario) {
-				throw new RuntimeException(
+				throw new ReglaNegocioException(
 						"Ya existe otro usuario registrado con el nombre de usuario " + usuarioActualizado.getUsuario());
 			}
 		});
@@ -41,7 +53,9 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 		existente.setNombres(usuarioActualizado.getNombres());
 		existente.setApellidos(usuarioActualizado.getApellidos());
 		existente.setUsuario(usuarioActualizado.getUsuario());
-		existente.setContrasena(usuarioActualizado.getContrasena());
+		if (usuarioActualizado.getContrasena() != null && !usuarioActualizado.getContrasena().isBlank()) {
+			existente.setContrasena(passwordEncoder.encode(usuarioActualizado.getContrasena()));
+		}
 		existente.setEstado(usuarioActualizado.getEstado());
 
 		return repositorio.guardar(existente);
@@ -49,7 +63,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 
 	@Override
 	public Usuario buscarPorId(int idUsuario) {
-		return repositorio.buscarPorId(idUsuario).orElseThrow(() -> new RuntimeException("No se encontro Usuario"));
+		return repositorio.buscarPorId(idUsuario).orElseThrow(() -> new RecursoNoEncontradoException("No se encontro Usuario"));
 	}
 
 	@Override
@@ -60,7 +74,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 	@Override
 	public void eliminar(int idUsuario) {
 		repositorio.eliminar(idUsuario);
-		
+
 	}
 
 }

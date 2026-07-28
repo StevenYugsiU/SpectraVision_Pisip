@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IClienteUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.Cliente;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
+import com.uisrael.spectraVisionPisip.dominio.excepciones.ReglaNegocioException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IClienteRepositorio;
 
 public class ClienteUseCaseImpl implements IClienteUseCase{
@@ -19,7 +21,7 @@ public class ClienteUseCaseImpl implements IClienteUseCase{
 	@Override
 	public Cliente guardar(Cliente nuevoCliente) {
 		repositorio.buscarPorCedula(nuevoCliente.getCedula()).ifPresent(existente -> {
-			throw new RuntimeException("Ya existe un cliente registrado con la cedula " + nuevoCliente.getCedula());
+			throw new ReglaNegocioException("Ya existe un cliente registrado con la cedula " + nuevoCliente.getCedula());
 		});
 		return repositorio.guardar(nuevoCliente);
 	}
@@ -30,7 +32,7 @@ public class ClienteUseCaseImpl implements IClienteUseCase{
 
 		repositorio.buscarPorCedula(clienteActualizado.getCedula()).ifPresent(otro -> {
 			if (otro.getIdCliente() != idCliente) {
-				throw new RuntimeException(
+				throw new ReglaNegocioException(
 						"Ya existe otro cliente registrado con la cedula " + clienteActualizado.getCedula());
 			}
 		});
@@ -51,13 +53,13 @@ public class ClienteUseCaseImpl implements IClienteUseCase{
 	@Override
 	public Cliente buscarPorId(int idCliente) {
 		return repositorio.buscarPorId(idCliente)
-				.orElseThrow(() -> new RuntimeException("No se encontro el cliente con id " + idCliente));
+				.orElseThrow(() -> new RecursoNoEncontradoException("No se encontro el cliente con id " + idCliente));
 	}
 
 	@Override
 	public Cliente buscarPorCedula(String cedula) {
 		return repositorio.buscarPorCedula(cedula)
-				.orElseThrow(() -> new RuntimeException("No se encontro el cliente con cedula " + cedula));
+				.orElseThrow(() -> new RecursoNoEncontradoException("No se encontro el cliente con cedula " + cedula));
 	}
 
 	@Override

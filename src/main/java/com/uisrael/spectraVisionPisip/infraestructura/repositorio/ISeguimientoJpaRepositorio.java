@@ -9,7 +9,7 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa.Seguimien
 
 public interface ISeguimientoJpaRepositorio extends JpaRepository<SeguimientoEntity, Integer> {
 
-	List<SeguimientoEntity> findByFkEntregaEntityIdEntrega(int idEntrega);
+	List<SeguimientoEntity> findByFkEntregaIdEntrega(int idEntrega);
 
 	List<SeguimientoEntity> findByFechaSeguimientoBetweenOrderByFechaSeguimientoAsc(Date desde, Date hasta);
 

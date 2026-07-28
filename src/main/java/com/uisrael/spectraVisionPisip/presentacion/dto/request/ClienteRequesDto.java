@@ -2,6 +2,7 @@ package com.uisrael.spectraVisionPisip.presentacion.dto.request;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class ClienteRequesDto {
 	private String apellidos;
 	@NotNull
 	private Date fechaNacimiento;
+	@Min(value = 0, message = "La edad no puede ser negativa")
 	private int edad;
 	@NotBlank
 	private String ocupacion;

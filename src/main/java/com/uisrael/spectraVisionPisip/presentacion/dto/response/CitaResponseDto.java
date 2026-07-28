@@ -1,33 +1,33 @@
 package com.uisrael.spectraVisionPisip.presentacion.dto.response;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 public class CitaResponseDto {
-	
+
 	private int idCita;
-	private int idCliente;
-	private Date fecha;
+	private ClienteResponseDto fkCliente;
+	private LocalDate fecha;
 	private LocalTime hora;
 	private String tipoCita;
 	private String estado;
-	
+
 	public int getIdCita() {
 		return idCita;
 	}
 	public void setIdCita(int idCita) {
 		this.idCita = idCita;
 	}
-	public int getIdCliente() {
-		return idCliente;
+	public ClienteResponseDto getFkCliente() {
+		return fkCliente;
 	}
-	public void setIdCliente(int idCliente) {
-		this.idCliente = idCliente;
+	public void setFkCliente(ClienteResponseDto fkCliente) {
+		this.fkCliente = fkCliente;
 	}
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 	public LocalTime getHora() {
@@ -48,7 +48,7 @@ public class CitaResponseDto {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
+
+
 
 }

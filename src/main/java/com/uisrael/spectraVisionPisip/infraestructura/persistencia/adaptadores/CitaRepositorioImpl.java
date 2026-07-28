@@ -1,7 +1,7 @@
 package com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,14 +52,14 @@ public class CitaRepositorioImpl implements ICitaRepositorio{
 
 	@Override
 	public List<Cita> buscarPorIdCliente(int idCliente) {
-		return jpaRepositorio.findByFkClienteEntityIdCliente(idCliente)
+		return jpaRepositorio.findByFkClienteIdCliente(idCliente)
 				.stream()
 				.map(entityMapper :: toDomain)
 				.toList();
 	}
 
 	@Override
-	public List<Cita> buscarPorFechaYHora(Date fecha, LocalTime hora) {
+	public List<Cita> buscarPorFechaYHora(LocalDate fecha, LocalTime hora) {
 		return jpaRepositorio.findByFechaAndHora(fecha, hora)
 				.stream()
 				.map(entityMapper :: toDomain)
@@ -67,7 +67,7 @@ public class CitaRepositorioImpl implements ICitaRepositorio{
 	}
 
 	@Override
-	public List<Cita> buscarPorFecha(Date fecha) {
+	public List<Cita> buscarPorFecha(LocalDate fecha) {
 		return jpaRepositorio.findByFechaOrderByHoraAsc(fecha)
 				.stream()
 				.map(entityMapper :: toDomain)

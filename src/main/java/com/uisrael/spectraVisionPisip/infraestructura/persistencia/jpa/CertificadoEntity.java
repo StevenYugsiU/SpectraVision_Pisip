@@ -22,7 +22,7 @@ public class CertificadoEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "fk_examen_visual")
-	private ExamenVisualEntity fkExamenVisualEntity;
+	private ExamenVisualEntity fkExamenVisual;
 
 	private Date fechaGeneracion;
 	private String observaciones;

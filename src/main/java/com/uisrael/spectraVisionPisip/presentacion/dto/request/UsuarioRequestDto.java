@@ -14,7 +14,6 @@ public class UsuarioRequestDto {
 	private String apellidos;
 	@NotBlank
 	private String usuario;
-	@NotBlank
 	private String contrasena;
 	@NotNull
 	private Boolean estado;

@@ -8,7 +8,9 @@ import com.uisrael.spectraVisionPisip.dominio.entidades.Rol;
 public interface IRolUseCase {
 
 	Rol guardar (Rol nuevoRol);
-	
+
+	Rol actualizar(int idRol, Rol rolActualizado);
+
 	Rol buscarPorId(int idRol);
 	
 	List<Rol> listarTodos();
