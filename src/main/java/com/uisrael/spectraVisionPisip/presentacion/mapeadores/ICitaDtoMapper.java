@@ -12,6 +12,7 @@ import com.uisrael.spectraVisionPisip.presentacion.dto.response.CitaResponseDto;
 public interface ICitaDtoMapper {
 
 	@Mapping(source = "idCliente", target = "fkCliente")
+	@Mapping(target = "nombreCliente", ignore = true)
 	Cita toDomain(CitaRequestDto dto);
 
 	CitaResponseDto toResponseDto(Cita citaPojo);

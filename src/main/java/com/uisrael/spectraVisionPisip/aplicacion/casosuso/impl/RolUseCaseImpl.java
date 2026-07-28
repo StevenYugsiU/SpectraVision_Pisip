@@ -30,11 +30,11 @@ public class RolUseCaseImpl implements IRolUseCase {
 		Rol existente = buscarPorId(idRol);
 
 		repositorio.buscarPorNombre(rolActualizado.getNombre()).ifPresent(otro -> {
-			if (otro.getIdRol() != idRol) {
-				throw new ReglaNegocioException("Ya existe otro rol registrado con el nombre " + rolActualizado.getNombre());
-			}
+		    if (otro.getIdRol() != idRol) {
+		        throw new ReglaNegocioException(
+		                "Ya existe otro rol registrado con el nombre " + rolActualizado.getNombre());
+		    }
 		});
-
 		existente.setNombre(rolActualizado.getNombre());
 		existente.setDescripcion(rolActualizado.getDescripcion());
 

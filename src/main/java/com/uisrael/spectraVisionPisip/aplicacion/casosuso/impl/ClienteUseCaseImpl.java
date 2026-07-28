@@ -6,16 +6,29 @@ import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IClienteUseCas
 import com.uisrael.spectraVisionPisip.dominio.entidades.Cliente;
 import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
 import com.uisrael.spectraVisionPisip.dominio.excepciones.ReglaNegocioException;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.ICitaRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IClienteRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.IEntregaRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.IHistoriaClinicaRepositorio;
 
 public class ClienteUseCaseImpl implements IClienteUseCase{
 
+	private static final String ESTADO_CANCELADA = "Cancelada";
+	private static final String ESTADO_ENTREGADO = "Entregado";
+
 	private final IClienteRepositorio repositorio;
+	private final IHistoriaClinicaRepositorio historiaClinicaRepositorio;
+	private final ICitaRepositorio citaRepositorio;
+	private final IEntregaRepositorio entregaRepositorio;
 
 
-	public ClienteUseCaseImpl(IClienteRepositorio repositorio) {
+	public ClienteUseCaseImpl(IClienteRepositorio repositorio, IHistoriaClinicaRepositorio historiaClinicaRepositorio,
+			ICitaRepositorio citaRepositorio, IEntregaRepositorio entregaRepositorio) {
 		super();
 		this.repositorio = repositorio;
+		this.historiaClinicaRepositorio = historiaClinicaRepositorio;
+		this.citaRepositorio = citaRepositorio;
+		this.entregaRepositorio = entregaRepositorio;
 	}
 
 	@Override
@@ -74,8 +87,29 @@ public class ClienteUseCaseImpl implements IClienteUseCase{
 
 	@Override
 	public void eliminar(int idCliente) {
-		repositorio.eliminar(idCliente);
+		Cliente cliente = buscarPorId(idCliente);
+		cliente.setEstado(false);
+		repositorio.guardar(cliente);
 
+		historiaClinicaRepositorio.buscarPorIdCliente(idCliente).ifPresent(historia -> {
+			historia.setEstado(false);
+			historiaClinicaRepositorio.guardar(historia);
+		});
+
+		citaRepositorio.buscarPorIdCliente(idCliente).stream()
+				.filter(cita -> !ESTADO_CANCELADA.equalsIgnoreCase(cita.getEstado()))
+				.forEach(cita -> {
+					cita.setEstado(ESTADO_CANCELADA);
+					citaRepositorio.guardar(cita);
+				});
+
+		entregaRepositorio.buscarPorIdCliente(idCliente).stream()
+				.filter(entrega -> !ESTADO_CANCELADA.equalsIgnoreCase(entrega.getEstado())
+						&& !ESTADO_ENTREGADO.equalsIgnoreCase(entrega.getEstado()))
+				.forEach(entrega -> {
+					entrega.setEstado(ESTADO_CANCELADA);
+					entregaRepositorio.guardar(entrega);
+				});
 	}
 
 }

@@ -172,8 +172,9 @@ public class SpectraVisionConfig {
 	}
 	
 	@Bean
-	IClienteUseCase clienteUseCase(IClienteRepositorio repo) {
-		return new ClienteUseCaseImpl(repo);
+	IClienteUseCase clienteUseCase(IClienteRepositorio repo, IHistoriaClinicaRepositorio historiaClinicaRepositorio,
+			ICitaRepositorio citaRepositorio, IEntregaRepositorio entregaRepositorio) {
+		return new ClienteUseCaseImpl(repo, historiaClinicaRepositorio, citaRepositorio, entregaRepositorio);
 	}
 	
 	
