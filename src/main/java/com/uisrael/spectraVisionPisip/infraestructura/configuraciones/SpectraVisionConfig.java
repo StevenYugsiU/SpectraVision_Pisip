@@ -1,5 +1,6 @@
 package com.uisrael.spectraVisionPisip.infraestructura.configuraciones;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -37,6 +38,7 @@ import com.uisrael.spectraVisionPisip.dominio.repositorio.IRolRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ISeguimientoRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRolRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.servicios.INotificacionService;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.CertificadoRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.CitaRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.ClienteRepositorioImpl;
@@ -47,6 +49,7 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.R
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.SeguimientoRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.UsuarioRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.UsuarioRolRepositorioImpl;
+import com.uisrael.spectraVisionPisip.infraestructura.notificaciones.TwilioNotificacionServiceImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.ICertificadoJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.ICitaJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IClienteJpaMapper;
@@ -74,6 +77,12 @@ public class SpectraVisionConfig {
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	INotificacionService notificacionService(@Value("${twilio.account-sid}") String accountSid,
+			@Value("${twilio.auth-token}") String authToken, @Value("${twilio.whatsapp-from}") String numeroOrigen) {
+		return new TwilioNotificacionServiceImpl(accountSid, authToken, numeroOrigen);
 	}
 
 	/*HistoriaClinica*/
@@ -159,8 +168,9 @@ public class SpectraVisionConfig {
 	}
 	
 	@Bean
-	ICitaUseCase citaUseCase(ICitaRepositorio repo) {
-		return new CitaUseCaseImpl(repo);
+	ICitaUseCase citaUseCase(ICitaRepositorio repo, IClienteRepositorio clienteRepositorio,
+			INotificacionService notificacionService) {
+		return new CitaUseCaseImpl(repo, clienteRepositorio, notificacionService);
 	}
 	
 	

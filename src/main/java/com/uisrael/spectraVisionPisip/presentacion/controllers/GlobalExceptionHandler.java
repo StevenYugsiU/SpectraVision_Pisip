@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.uisrael.spectraVisionPisip.dominio.excepciones.CredencialesInvalidasException;
 import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
 import com.uisrael.spectraVisionPisip.dominio.excepciones.ReglaNegocioException;
 import com.uisrael.spectraVisionPisip.presentacion.dto.response.ErrorResponseDto;
@@ -24,6 +25,11 @@ public class GlobalExceptionHandler {
 	@ExceptionHandler(ReglaNegocioException.class)
 	public ResponseEntity<ErrorResponseDto> manejarReglaNegocio(ReglaNegocioException ex) {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDto(ex.getMessage()));
+	}
+
+	@ExceptionHandler(CredencialesInvalidasException.class)
+	public ResponseEntity<ErrorResponseDto> manejarCredencialesInvalidas(CredencialesInvalidasException ex) {
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ErrorResponseDto(ex.getMessage()));
 	}
 
 	@ExceptionHandler(IllegalArgumentException.class)

@@ -6,18 +6,26 @@ import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICitaUseCase;
 import com.uisrael.spectraVisionPisip.dominio.entidades.Cita;
+import com.uisrael.spectraVisionPisip.dominio.entidades.Cliente;
 import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoException;
 import com.uisrael.spectraVisionPisip.dominio.excepciones.ReglaNegocioException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ICitaRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.IClienteRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.servicios.INotificacionService;
 
 public class CitaUseCaseImpl implements ICitaUseCase{
 
 	private final ICitaRepositorio repositorio;
+	private final IClienteRepositorio clienteRepositorio;
+	private final INotificacionService notificacionService;
 
 
 
-	public CitaUseCaseImpl(ICitaRepositorio repositorio) {
+	public CitaUseCaseImpl(ICitaRepositorio repositorio, IClienteRepositorio clienteRepositorio,
+			INotificacionService notificacionService) {
 		this.repositorio = repositorio;
+		this.clienteRepositorio = clienteRepositorio;
+		this.notificacionService = notificacionService;
 	}
 
 	@Override
@@ -25,7 +33,20 @@ public class CitaUseCaseImpl implements ICitaUseCase{
 
 		validarDisponibilidad(nuevaCita.getFecha(), nuevaCita.getHora(), nuevaCita.getIdCita());
 
-		return repositorio.guardar(nuevaCita);
+		Cita citaGuardada = repositorio.guardar(nuevaCita);
+		enviarConfirmacionWhatsApp(citaGuardada);
+		return citaGuardada;
+	}
+
+	private void enviarConfirmacionWhatsApp(Cita cita) {
+		try {
+			Cliente cliente = clienteRepositorio.buscarPorId(cita.getFkCliente().getIdCliente())
+					.orElseThrow(() -> new RecursoNoEncontradoException("No se encontro el cliente"));
+			String nombreCliente = cliente.getNombres() + " " + cliente.getApellidos();
+			notificacionService.enviarConfirmacionCita(cliente.getCelular(), nombreCliente, cita.getFecha(), cita.getHora());
+		} catch (Exception ex) {
+			// No se bloquea el agendamiento de la cita si falla el envio del WhatsApp.
+		}
 	}
 
 	@Override
