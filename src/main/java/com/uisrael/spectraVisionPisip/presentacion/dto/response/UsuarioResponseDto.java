@@ -8,6 +8,7 @@ public class UsuarioResponseDto {
 	private String nombres;
 	private String apellidos;
 	private String usuario;
+	private String correo;
 	private Boolean estado;
 
 
@@ -41,6 +42,12 @@ public class UsuarioResponseDto {
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
-	
-	
+	public String getCorreo() {
+		return correo;
+	}
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+
 }

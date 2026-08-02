@@ -53,6 +53,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 		existente.setNombres(usuarioActualizado.getNombres());
 		existente.setApellidos(usuarioActualizado.getApellidos());
 		existente.setUsuario(usuarioActualizado.getUsuario());
+		existente.setCorreo(usuarioActualizado.getCorreo());
 		if (usuarioActualizado.getContrasena() != null && !usuarioActualizado.getContrasena().isBlank()) {
 			existente.setContrasena(passwordEncoder.encode(usuarioActualizado.getContrasena()));
 		}

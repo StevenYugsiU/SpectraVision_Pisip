@@ -8,19 +8,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IAuthUseCase;
+import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IPasswordResetUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.LoginResultado;
 import com.uisrael.spectraVisionPisip.dominio.excepciones.CredencialesInvalidasException;
 import com.uisrael.spectraVisionPisip.presentacion.dto.request.LoginRequestDto;
+import com.uisrael.spectraVisionPisip.presentacion.dto.request.OlvideContrasenaRequestDto;
+import com.uisrael.spectraVisionPisip.presentacion.dto.request.RestablecerContrasenaRequestDto;
 import com.uisrael.spectraVisionPisip.presentacion.dto.response.LoginResponseDto;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/spectra/auth")
 public class AuthController {
 
 	private final IAuthUseCase authUseCase;
+	private final IPasswordResetUseCase passwordResetUseCase;
 
-	public AuthController(IAuthUseCase authUseCase) {
+	public AuthController(IAuthUseCase authUseCase, IPasswordResetUseCase passwordResetUseCase) {
 		this.authUseCase = authUseCase;
+		this.passwordResetUseCase = passwordResetUseCase;
 	}
 
 	@PostMapping("/login")
@@ -45,6 +52,19 @@ public class AuthController {
 		} catch (CredencialesInvalidasException e) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MensajeError(e.getMessage()));
 		}
+	}
+
+	@PostMapping("/olvide-contrasena")
+	public ResponseEntity<?> olvideContrasena(@Valid @RequestBody OlvideContrasenaRequestDto request) {
+		passwordResetUseCase.solicitarReset(request.getUsuario());
+		return ResponseEntity.ok(new MensajeError(
+				"Si el usuario existe y tiene un correo registrado, se envió un enlace de recuperación."));
+	}
+
+	@PostMapping("/restablecer-contrasena")
+	public ResponseEntity<?> restablecerContrasena(@Valid @RequestBody RestablecerContrasenaRequestDto request) {
+		passwordResetUseCase.restablecer(request.getToken(), request.getNuevaContrasena());
+		return ResponseEntity.ok(new MensajeError("Contraseña actualizada correctamente."));
 	}
 
 	private record MensajeError(String message) {

@@ -1,6 +1,8 @@
 package com.uisrael.spectraVisionPisip.dominio.entidades;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class HistoriaClinica {
 
@@ -10,6 +12,7 @@ public class HistoriaClinica {
 	private String antecedentes;
 	private String observacionesGenerales;
 	private Boolean estado;
+	private List<ExamenVisual> examenesVisuales = new ArrayList<>();
 
 	public HistoriaClinica() {
 	}
@@ -82,6 +85,14 @@ public class HistoriaClinica {
 
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
+	}
+
+	public List<ExamenVisual> getExamenesVisuales() {
+		return examenesVisuales;
+	}
+
+	public void setExamenesVisuales(List<ExamenVisual> examenesVisuales) {
+		this.examenesVisuales = examenesVisuales;
 	}
 
 }
