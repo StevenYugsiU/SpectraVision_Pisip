@@ -1,5 +1,7 @@
 package com.uisrael.spectraVisionPisip.infraestructura.persistencia.jpa;
 
+import java.time.Instant;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,19 +12,23 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "usuario")
-public class UsuarioEntity {
+@Table(name = "password_reset_token")
+public class PasswordResetTokenEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idUsuario;
-	private String nombres;
-	private String apellidos;
+	private int idPasswordResetToken;
+
 	@Column(unique = true, nullable = false)
-	private String usuario;
-	private String contrasena;
-	@Column(unique = true)
-	private String correo;
-	private Boolean estado;
+	private String token;
+
+	@Column(name = "fk_usuario", nullable = false)
+	private int idUsuario;
+
+	@Column(nullable = false)
+	private Instant fechaExpiracion;
+
+	@Column(nullable = false)
+	private Boolean usado;
 
 }
