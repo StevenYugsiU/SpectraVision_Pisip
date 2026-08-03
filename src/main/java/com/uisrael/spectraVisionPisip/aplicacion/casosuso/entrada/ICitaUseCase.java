@@ -24,4 +24,6 @@ public interface ICitaUseCase {
 
 	Cita cancelar(int idCita);
 
+	Cita responderConfirmacionWhatsApp(String numeroWhatsApp, boolean confirmar);
+
 }

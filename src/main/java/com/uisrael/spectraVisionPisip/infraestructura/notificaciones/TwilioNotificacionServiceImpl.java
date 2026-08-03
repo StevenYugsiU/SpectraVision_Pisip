@@ -23,13 +23,26 @@ public class TwilioNotificacionServiceImpl implements INotificacionService {
 
 	@Override
 	public void enviarConfirmacionCita(String celular, String nombreCliente, LocalDate fecha, LocalTime hora) {
+		String mensaje = "Hola " + nombreCliente + ", se ha programado una cita en nuestro consultorio "
+				+ "SpectraVision para el día " + fecha.format(FORMATO_FECHA) + " a las " + hora.format(FORMATO_HORA)
+				+ ". Responde CONFIRMAR o CANCELAR para gestionar tu cita.";
+
+		enviarMensaje(celular, mensaje);
+	}
+
+	@Override
+	public void enviarAvisoLentesListos(String celular, String nombreCliente) {
+		String mensaje = "Hola " + nombreCliente + ", sus lentes ya se encuentran en nuestro consultorio. "
+				+ "Puede acercarse a retirarlos desde el día de hoy.";
+
+		enviarMensaje(celular, mensaje);
+	}
+
+	private void enviarMensaje(String celular, String mensaje) {
 		String numeroDestino = formatearNumeroWhatsApp(celular);
 		if (numeroDestino == null) {
 			return;
 		}
-
-		String mensaje = "Hola " + nombreCliente + ", se ha programado una cita en nuestro consultorio "
-				+ "SpectraVision para el día " + fecha.format(FORMATO_FECHA) + " a las " + hora.format(FORMATO_HORA) + ".";
 
 		Message.creator(new PhoneNumber(numeroDestino), new PhoneNumber(numeroOrigen), mensaje).create();
 	}

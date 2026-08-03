@@ -107,4 +107,29 @@ public class CitaUseCaseImpl implements ICitaUseCase{
 		return repositorio.buscarPorFecha(fecha);
 	}
 
+	@Override
+	public Cita responderConfirmacionWhatsApp(String numeroWhatsApp, boolean confirmar) {
+		String telefonoNormalizado = normalizarTelefono(numeroWhatsApp);
+
+		Cita citaEncontrada = repositorio.buscarPendientesOrdenadasPorFecha().stream()
+				.filter(cita -> telefonoNormalizado.equals(normalizarTelefono(cita.getFkCliente().getCelular())))
+				.findFirst()
+				.orElseThrow(() -> new RecursoNoEncontradoException(
+						"No se encontro una cita pendiente para el numero " + numeroWhatsApp));
+
+		citaEncontrada.setEstado(confirmar ? "Confirmada" : "Cancelada");
+		return repositorio.guardar(citaEncontrada);
+	}
+
+	private String normalizarTelefono(String telefono) {
+		if (telefono == null) {
+			return "";
+		}
+		String soloDigitos = telefono.replaceAll("[^0-9]", "");
+		if (soloDigitos.length() > 9) {
+			soloDigitos = soloDigitos.substring(soloDigitos.length() - 9);
+		}
+		return soloDigitos;
+	}
+
 }

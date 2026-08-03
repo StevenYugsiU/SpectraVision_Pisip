@@ -22,4 +22,6 @@ public interface ICitaRepositorio {
 	List<Cita> buscarPorFechaYHora(LocalDate fecha, LocalTime hora);
 
 	List<Cita> buscarPorFecha(LocalDate fecha);
+
+	List<Cita> buscarPendientesOrdenadasPorFecha();
 }

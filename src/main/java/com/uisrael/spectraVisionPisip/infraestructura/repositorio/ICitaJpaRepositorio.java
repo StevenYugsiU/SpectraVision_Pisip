@@ -16,4 +16,6 @@ public interface ICitaJpaRepositorio extends JpaRepository<CitaEntity, Integer>{
 
 	List<CitaEntity> findByFechaOrderByHoraAsc(LocalDate fecha);
 
+	List<CitaEntity> findByEstadoOrderByFechaAscHoraAsc(String estado);
+
 }

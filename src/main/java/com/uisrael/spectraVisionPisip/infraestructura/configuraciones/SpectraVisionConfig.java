@@ -206,8 +206,9 @@ public class SpectraVisionConfig {
 	}
 
 	@Bean
-	IEntregaUseCase entregaUseCase(IEntregaRepositorio repo, IClienteRepositorio clienteRepositorio) {
-		return new EntregaUseCaseImpl(repo, clienteRepositorio);
+	IEntregaUseCase entregaUseCase(IEntregaRepositorio repo, IClienteRepositorio clienteRepositorio,
+			INotificacionService notificacionService) {
+		return new EntregaUseCaseImpl(repo, clienteRepositorio, notificacionService);
 	}
 
 }

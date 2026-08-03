@@ -74,4 +74,12 @@ public class CitaRepositorioImpl implements ICitaRepositorio{
 				.toList();
 	}
 
+	@Override
+	public List<Cita> buscarPendientesOrdenadasPorFecha() {
+		return jpaRepositorio.findByEstadoOrderByFechaAscHoraAsc("Pendiente")
+				.stream()
+				.map(entityMapper :: toDomain)
+				.toList();
+	}
+
 }
