@@ -25,12 +25,17 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 	public Usuario guardar(Usuario nuevoUsuario) {
 
 		if (nuevoUsuario.getContrasena() == null || nuevoUsuario.getContrasena().isBlank()) {
-			throw new IllegalArgumentException("La contrasena es obligatoria");
+			throw new IllegalArgumentException("La contraseña es obligatoria");
 		}
 
 		repositorio.buscarPorUsuario(nuevoUsuario.getUsuario()).ifPresent(existente -> {
 			throw new ReglaNegocioException("Ya existe un usuario registrado con el nombre de usuario "
 					+ nuevoUsuario.getUsuario());
+		});
+
+		repositorio.buscarPorCorreo(nuevoUsuario.getCorreo()).ifPresent(existente -> {
+			throw new ReglaNegocioException("Ya existe un usuario registrado con el correo "
+					+ nuevoUsuario.getCorreo());
 		});
 
 		nuevoUsuario.setContrasena(passwordEncoder.encode(nuevoUsuario.getContrasena()));
@@ -47,6 +52,13 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 			if (otro.getIdUsuario() != idUsuario) {
 				throw new ReglaNegocioException(
 						"Ya existe otro usuario registrado con el nombre de usuario " + usuarioActualizado.getUsuario());
+			}
+		});
+
+		repositorio.buscarPorCorreo(usuarioActualizado.getCorreo()).ifPresent(otro -> {
+			if (otro.getIdUsuario() != idUsuario) {
+				throw new ReglaNegocioException(
+						"Ya existe otro usuario registrado con el correo " + usuarioActualizado.getCorreo());
 			}
 		});
 

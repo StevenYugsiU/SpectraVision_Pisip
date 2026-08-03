@@ -56,7 +56,7 @@ public class AuthController {
 
 	@PostMapping("/olvide-contrasena")
 	public ResponseEntity<?> olvideContrasena(@Valid @RequestBody OlvideContrasenaRequestDto request) {
-		passwordResetUseCase.solicitarReset(request.getUsuario());
+		passwordResetUseCase.solicitarReset(request.getUsuario(), request.getResetPasswordUrl());
 		return ResponseEntity.ok(new MensajeError(
 				"Si el usuario existe y tiene un correo registrado, se envió un enlace de recuperación."));
 	}

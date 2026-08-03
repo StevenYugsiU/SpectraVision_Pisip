@@ -4,8 +4,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IPasswordResetUseCase;
@@ -15,6 +13,7 @@ import com.uisrael.spectraVisionPisip.dominio.excepciones.RecursoNoEncontradoExc
 import com.uisrael.spectraVisionPisip.dominio.excepciones.ReglaNegocioException;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IPasswordResetTokenRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.servicios.IEmailService;
 
 public class PasswordResetUseCaseImpl implements IPasswordResetUseCase {
 
@@ -23,29 +22,25 @@ public class PasswordResetUseCaseImpl implements IPasswordResetUseCase {
 	private final IUsuarioRepositorio usuarioRepositorio;
 	private final IPasswordResetTokenRepositorio tokenRepositorio;
 	private final PasswordEncoder passwordEncoder;
-	private final JavaMailSender mailSender;
-	private final String frontendResetUrl;
+	private final IEmailService emailService;
 
 	public PasswordResetUseCaseImpl(IUsuarioRepositorio usuarioRepositorio,
 			IPasswordResetTokenRepositorio tokenRepositorio, PasswordEncoder passwordEncoder,
-			JavaMailSender mailSender, String frontendResetUrl) {
+			IEmailService emailService) {
 		this.usuarioRepositorio = usuarioRepositorio;
 		this.tokenRepositorio = tokenRepositorio;
 		this.passwordEncoder = passwordEncoder;
-		this.mailSender = mailSender;
-		this.frontendResetUrl = frontendResetUrl;
+		this.emailService = emailService;
 	}
 
 	@Override
-	public void solicitarReset(String usuario) {
+	public void solicitarReset(String usuario, String resetPasswordUrl) {
 		usuarioRepositorio.buscarPorUsuario(usuario)
 				.filter(encontrado -> encontrado.getCorreo() != null && !encontrado.getCorreo().isBlank())
-				.ifPresent(this::generarYEnviarToken);
-		// Si el usuario no existe o no tiene correo registrado, no se informa nada
-		// al llamador para evitar enumeracion de usuarios validos.
+				.ifPresent(encontrado -> generarYEnviarToken(encontrado, resetPasswordUrl));
 	}
 
-	private void generarYEnviarToken(Usuario encontrado) {
+	private void generarYEnviarToken(Usuario encontrado, String resetPasswordUrl) {
 		PasswordResetToken resetToken = new PasswordResetToken();
 		resetToken.setToken(UUID.randomUUID().toString());
 		resetToken.setIdUsuario(encontrado.getIdUsuario());
@@ -53,19 +48,16 @@ public class PasswordResetUseCaseImpl implements IPasswordResetUseCase {
 		resetToken.setUsado(false);
 		tokenRepositorio.guardar(resetToken);
 
-		enviarCorreoRecuperacion(encontrado, resetToken.getToken());
+		enviarCorreoRecuperacion(encontrado, resetToken.getToken(), resetPasswordUrl);
 	}
 
-	private void enviarCorreoRecuperacion(Usuario usuario, String token) {
-		SimpleMailMessage mensaje = new SimpleMailMessage();
-		mensaje.setTo(usuario.getCorreo());
-		mensaje.setSubject("Recuperación de contraseña - SpectraVision");
-		mensaje.setText("Hola " + usuario.getNombres() + ",\n\n"
+	private void enviarCorreoRecuperacion(Usuario usuario, String token, String resetPasswordUrl) {
+		String cuerpo = "Hola " + usuario.getNombres() + ",\n\n"
 				+ "Recibimos una solicitud para restablecer tu contraseña. Ingresa al siguiente enlace "
 				+ "(valido por " + EXPIRACION_MINUTOS + " minutos):\n\n"
-				+ frontendResetUrl + "?token=" + token + "\n\n"
-				+ "Si no solicitaste este cambio, puedes ignorar este mensaje.");
-		mailSender.send(mensaje);
+				+ resetPasswordUrl + "?token=" + token + "\n\n"
+				+ "Si no solicitaste este cambio, puedes ignorar este mensaje.";
+		emailService.enviarCorreo(usuario.getCorreo(), "Recuperación de contraseña - SpectraVision", cuerpo);
 	}
 
 	@Override

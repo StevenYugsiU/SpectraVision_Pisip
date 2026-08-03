@@ -53,4 +53,10 @@ public class UsuarioRepositorioImpl implements IUsuarioRepositorio{
 				.map(entityMapper :: toDomain);
 	}
 
+	@Override
+	public Optional<Usuario> buscarPorCorreo(String correo) {
+		return jpaRepositorio.findByCorreo(correo)
+				.map(entityMapper :: toDomain);
+	}
+
 }

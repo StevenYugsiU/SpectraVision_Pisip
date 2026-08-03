@@ -8,4 +8,7 @@ public class OlvideContrasenaRequestDto {
 
 	@NotBlank
 	private String usuario;
+
+	@NotBlank
+	private String resetPasswordUrl;
 }

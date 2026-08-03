@@ -42,6 +42,7 @@ import com.uisrael.spectraVisionPisip.dominio.repositorio.IRolRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ISeguimientoRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRolRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.servicios.IEmailService;
 import com.uisrael.spectraVisionPisip.dominio.servicios.INotificacionService;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.CertificadoRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.CitaRepositorioImpl;
@@ -54,6 +55,7 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.R
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.SeguimientoRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.UsuarioRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.UsuarioRolRepositorioImpl;
+import com.uisrael.spectraVisionPisip.infraestructura.notificaciones.EmailServiceImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.notificaciones.TwilioNotificacionServiceImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.ICertificadoJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.ICitaJpaMapper;
@@ -164,12 +166,16 @@ public class SpectraVisionConfig {
 	}
 
 	@Bean
+	IEmailService emailService(JavaMailSender mailSender) {
+		return new EmailServiceImpl(mailSender);
+	}
+
+	@Bean
 	IPasswordResetUseCase passwordResetUseCase(IUsuarioRepositorio usuarioRepositorio,
 			IPasswordResetTokenRepositorio passwordResetTokenRepositorio, PasswordEncoder passwordEncoder,
-			JavaMailSender mailSender,
-			@Value("${app.frontend.reset-password-url}") String frontendResetUrl) {
+			IEmailService emailService) {
 		return new PasswordResetUseCaseImpl(usuarioRepositorio, passwordResetTokenRepositorio, passwordEncoder,
-				mailSender, frontendResetUrl);
+				emailService);
 	}
 	
 	

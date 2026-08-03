@@ -57,7 +57,7 @@ public class SeguimientoRepositorioImpl implements ISeguimientoRepositorio{
 
 	@Override
 	public List<Seguimiento> buscarProximos(Date desde, Date hasta) {
-		return jpaRepositorio.findByFechaSeguimientoBetweenOrderByFechaSeguimientoAsc(desde, hasta)
+		return jpaRepositorio.findByEstadoAndFechaSeguimientoBetweenOrderByFechaSeguimientoAsc("Pendiente", desde, hasta)
 				.stream()
 				.map(entityMapper :: toDomain)
 				.toList();
