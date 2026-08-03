@@ -10,4 +10,6 @@ public interface IUsuarioJpaRepositorio extends JpaRepository<UsuarioEntity, Int
 
 	Optional<UsuarioEntity> findByUsuario(String usuario);
 
+	Optional<UsuarioEntity> findByCorreo(String correo);
+
 }

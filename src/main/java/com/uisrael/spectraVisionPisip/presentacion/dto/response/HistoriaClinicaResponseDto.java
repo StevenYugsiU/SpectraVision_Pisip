@@ -1,6 +1,7 @@
 package com.uisrael.spectraVisionPisip.presentacion.dto.response;
 
 import java.util.Date;
+import java.util.List;
 
 public class HistoriaClinicaResponseDto {
 
@@ -10,6 +11,7 @@ public class HistoriaClinicaResponseDto {
 	private String antecedentes;
 	private String observacionesGenerales;
 	private Boolean estado;
+	private List<ExamenVisualResumenDto> examenesVisuales;
 
 	public int getIdHistoriaClinica() {
 		return idHistoriaClinica;
@@ -46,6 +48,12 @@ public class HistoriaClinicaResponseDto {
 	}
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
+	}
+	public List<ExamenVisualResumenDto> getExamenesVisuales() {
+		return examenesVisuales;
+	}
+	public void setExamenesVisuales(List<ExamenVisualResumenDto> examenesVisuales) {
+		this.examenesVisuales = examenesVisuales;
 	}
 
 }

@@ -3,10 +3,12 @@ package com.uisrael.spectraVisionPisip.infraestructura.configuraciones;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IAuthUseCase;
+import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IPasswordResetUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICertificadoUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICitaUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IClienteUseCase;
@@ -18,6 +20,7 @@ import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ISeguimientoUs
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IUsuarioRolUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IUsuarioUseCase;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.AuthUseCaseImpl;
+import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.PasswordResetUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.CertificadoUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.CitaUseCaseImpl;
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl.ClienteUseCaseImpl;
@@ -34,10 +37,12 @@ import com.uisrael.spectraVisionPisip.dominio.repositorio.IClienteRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IEntregaRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IExamenVisualRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IHistoriaClinicaRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.repositorio.IPasswordResetTokenRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IRolRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.ISeguimientoRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.repositorio.IUsuarioRolRepositorio;
+import com.uisrael.spectraVisionPisip.dominio.servicios.IEmailService;
 import com.uisrael.spectraVisionPisip.dominio.servicios.INotificacionService;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.CertificadoRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.CitaRepositorioImpl;
@@ -45,10 +50,12 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.C
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.EntregaRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.ExamenVisualRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.HistoriaClinicaRepositorioImpl;
+import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.PasswordResetTokenRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.RolRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.SeguimientoRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.UsuarioRepositorioImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.adaptadores.UsuarioRolRepositorioImpl;
+import com.uisrael.spectraVisionPisip.infraestructura.notificaciones.EmailServiceImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.notificaciones.TwilioNotificacionServiceImpl;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.ICertificadoJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.ICitaJpaMapper;
@@ -56,6 +63,7 @@ import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IC
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IEntregaJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IExamenVisualJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IHistoriaClinicaJpaMapper;
+import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IPasswordResetTokenJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IRolJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.ISeguimientoJpaMapper;
 import com.uisrael.spectraVisionPisip.infraestructura.persistencia.mapeadores.IUsuarioJpaMapper;
@@ -66,6 +74,7 @@ import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IClienteJpaRep
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IEntregaJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IExamenVisualJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IHistoriaClinicaJpaRepositorio;
+import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IPasswordResetTokenJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IRolJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.ISeguimientoJpaRepositorio;
 import com.uisrael.spectraVisionPisip.infraestructura.repositorio.IUsuarioJpaRepositorio;
@@ -92,8 +101,9 @@ public class SpectraVisionConfig {
 	}
 	
 	@Bean
-	IHistoriaClinicaUseCase historiaClinicaUseCase(IHistoriaClinicaRepositorio repo, IClienteRepositorio clienteRepositorio) {
-		return new HistoriaClinicaUseCaseImpl(repo, clienteRepositorio);
+	IHistoriaClinicaUseCase historiaClinicaUseCase(IHistoriaClinicaRepositorio repo, IClienteRepositorio clienteRepositorio,
+			IExamenVisualRepositorio examenVisualRepositorio) {
+		return new HistoriaClinicaUseCaseImpl(repo, clienteRepositorio, examenVisualRepositorio);
 	}
 	
 	/*Rol*/
@@ -146,6 +156,26 @@ public class SpectraVisionConfig {
 	IAuthUseCase authUseCase(IUsuarioRepositorio usuarioRepositorio, IUsuarioRolRepositorio usuarioRolRepositorio,
 			IRolRepositorio rolRepositorio, PasswordEncoder passwordEncoder) {
 		return new AuthUseCaseImpl(usuarioRepositorio, usuarioRolRepositorio, rolRepositorio, passwordEncoder);
+	}
+
+	/*Password Reset*/
+	@Bean
+	IPasswordResetTokenRepositorio passwordResetTokenRepositorio(IPasswordResetTokenJpaRepositorio jpaRepositorio,
+			IPasswordResetTokenJpaMapper mapper) {
+		return new PasswordResetTokenRepositorioImpl(jpaRepositorio, mapper);
+	}
+
+	@Bean
+	IEmailService emailService(JavaMailSender mailSender) {
+		return new EmailServiceImpl(mailSender);
+	}
+
+	@Bean
+	IPasswordResetUseCase passwordResetUseCase(IUsuarioRepositorio usuarioRepositorio,
+			IPasswordResetTokenRepositorio passwordResetTokenRepositorio, PasswordEncoder passwordEncoder,
+			IEmailService emailService) {
+		return new PasswordResetUseCaseImpl(usuarioRepositorio, passwordResetTokenRepositorio, passwordEncoder,
+				emailService);
 	}
 	
 	

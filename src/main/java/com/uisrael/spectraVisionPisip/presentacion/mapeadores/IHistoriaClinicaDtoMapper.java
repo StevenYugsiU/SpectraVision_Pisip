@@ -4,8 +4,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import com.uisrael.spectraVisionPisip.dominio.entidades.Cliente;
+import com.uisrael.spectraVisionPisip.dominio.entidades.ExamenVisual;
 import com.uisrael.spectraVisionPisip.dominio.entidades.HistoriaClinica;
 import com.uisrael.spectraVisionPisip.presentacion.dto.request.HistoriaClinicaRequestDto;
+import com.uisrael.spectraVisionPisip.presentacion.dto.response.ExamenVisualResumenDto;
 import com.uisrael.spectraVisionPisip.presentacion.dto.response.HistoriaClinicaResponseDto;
 
 
@@ -16,6 +18,8 @@ public interface IHistoriaClinicaDtoMapper {
 	HistoriaClinica toDomain(HistoriaClinicaRequestDto dto);
 
 	HistoriaClinicaResponseDto toResponseDto (HistoriaClinica historiaClinicaPojo);
+
+	ExamenVisualResumenDto toResumenDto(ExamenVisual examenVisual);
 
 	default Cliente map(int idCliente) {
 		Cliente referencia = new Cliente();

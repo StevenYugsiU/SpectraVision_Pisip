@@ -11,6 +11,7 @@ public interface ISeguimientoJpaRepositorio extends JpaRepository<SeguimientoEnt
 
 	List<SeguimientoEntity> findByFkEntregaIdEntrega(int idEntrega);
 
-	List<SeguimientoEntity> findByFechaSeguimientoBetweenOrderByFechaSeguimientoAsc(Date desde, Date hasta);
+	List<SeguimientoEntity> findByEstadoAndFechaSeguimientoBetweenOrderByFechaSeguimientoAsc(String estado, Date desde,
+			Date hasta);
 
 }
