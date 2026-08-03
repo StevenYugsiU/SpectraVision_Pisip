@@ -47,14 +47,35 @@ public class GlobalExceptionHandler {
 
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity<ErrorResponseDto> manejarIntegridad(DataIntegrityViolationException ex) {
-		return ResponseEntity.status(HttpStatus.CONFLICT)
-				.body(new ErrorResponseDto("No se puede completar la operacion: el registro tiene datos relacionados o ya existe."));
+		String sqlState = obtenerSqlState(ex);
+		String mensaje;
+		if ("23505".equals(sqlState)) {
+			mensaje = "Ya existe un registro con esos mismos datos.";
+		} else if ("23503".equals(sqlState)) {
+			mensaje = "No se puede completar la operación porque este registro está siendo usado por otro.";
+		} else if ("23502".equals(sqlState)) {
+			mensaje = "Falta completar un dato obligatorio.";
+		} else {
+			mensaje = "No se pudo guardar la información. Verifique los datos ingresados.";
+		}
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(new ErrorResponseDto(mensaje));
+	}
+
+	private String obtenerSqlState(Throwable ex) {
+		Throwable causa = ex;
+		while (causa != null) {
+			if (causa instanceof java.sql.SQLException sqlEx) {
+				return sqlEx.getSQLState();
+			}
+			causa = causa.getCause();
+		}
+		return null;
 	}
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponseDto> manejarError(Exception ex) {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-				.body(new ErrorResponseDto("Ocurrio un error inesperado. Intente nuevamente."));
+				.body(new ErrorResponseDto("Ocurrió un error inesperado. Intente nuevamente."));
 	}
 
 }
