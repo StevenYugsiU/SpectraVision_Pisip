@@ -32,6 +32,10 @@ public class SeguimientoUseCaseImpl implements ISeguimientoUseCase {
 				.orElseThrow(() -> new RecursoNoEncontradoException(
 						"No se encontro la entrega con id " + idEntrega));
 
+		if (nuevoSeguimiento.getFechaSeguimiento() == null) {
+			nuevoSeguimiento.setFechaSeguimiento(new Date());
+		}
+
 		return repositorio.guardar(nuevoSeguimiento);
 	}
 

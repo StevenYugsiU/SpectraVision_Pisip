@@ -1,5 +1,6 @@
 package com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IEntregaUseCase;
@@ -11,6 +12,8 @@ import com.uisrael.spectraVisionPisip.dominio.repositorio.IEntregaRepositorio;
 import com.uisrael.spectraVisionPisip.dominio.servicios.INotificacionService;
 
 public class EntregaUseCaseImpl implements IEntregaUseCase {
+
+	private static final String ESTADO_PENDIENTE = "Pendiente";
 
 	private final IEntregaRepositorio repositorio;
 	private final IClienteRepositorio clienteRepositorio;
@@ -31,6 +34,11 @@ public class EntregaUseCaseImpl implements IEntregaUseCase {
 		Cliente cliente = clienteRepositorio.buscarPorId(idCliente)
 				.orElseThrow(() -> new RecursoNoEncontradoException(
 						"No se encontro el cliente con id " + idCliente));
+
+		if (nuevaEntrega.getFechaEntrega() == null) {
+			nuevaEntrega.setFechaEntrega(new Date());
+		}
+		nuevaEntrega.setEstado(ESTADO_PENDIENTE);
 
 		Entrega entregaGuardada = repositorio.guardar(nuevaEntrega);
 		enviarAvisoWhatsApp(cliente);

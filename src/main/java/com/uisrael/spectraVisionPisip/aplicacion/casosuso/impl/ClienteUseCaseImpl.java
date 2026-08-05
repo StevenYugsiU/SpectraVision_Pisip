@@ -1,5 +1,6 @@
 package com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IClienteUseCase;
@@ -36,6 +37,10 @@ public class ClienteUseCaseImpl implements IClienteUseCase{
 		repositorio.buscarPorCedula(nuevoCliente.getCedula()).ifPresent(existente -> {
 			throw new ReglaNegocioException("Ya existe un cliente registrado con la cedula " + nuevoCliente.getCedula());
 		});
+
+		nuevoCliente.setFechaRegistro(new Date());
+		nuevoCliente.setEstado(true);
+
 		return repositorio.guardar(nuevoCliente);
 	}
 

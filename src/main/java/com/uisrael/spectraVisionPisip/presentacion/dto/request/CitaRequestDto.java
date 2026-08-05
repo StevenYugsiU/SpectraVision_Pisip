@@ -20,7 +20,6 @@ public class CitaRequestDto {
 	private LocalTime hora;
 	@NotBlank
 	private String tipoCita;
-	@NotBlank
 	private String estado;
 
 }

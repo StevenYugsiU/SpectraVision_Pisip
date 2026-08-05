@@ -14,11 +14,9 @@ public class HistoriaClinicaRequestDto {
 	private int idHistoriaClinica;
 	@Min(value = 1, message = "Debe seleccionar un cliente")
 	private int idCliente;
-	@NotNull
 	private Date fechaApertura;
 	@NotBlank
 	private String antecedentes;
 	private String observacionesGenerales;
-	@NotNull
 	private Boolean estado;
 }

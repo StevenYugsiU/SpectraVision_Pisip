@@ -1,5 +1,6 @@
 package com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IExamenVisualUseCase;
@@ -34,6 +35,10 @@ public class ExamenVisualUseCaseImpl implements IExamenVisualUseCase{
 		if (!Boolean.TRUE.equals(historia.getEstado())) {
 			throw new ReglaNegocioException(
 					"La historia clinica con id " + idHistoria + " no esta activa");
+		}
+
+		if (nuevoExamenVisual.getFechaExamen() == null) {
+			nuevoExamenVisual.setFechaExamen(new Date());
 		}
 
 		return repositorio.guardar(nuevoExamenVisual);

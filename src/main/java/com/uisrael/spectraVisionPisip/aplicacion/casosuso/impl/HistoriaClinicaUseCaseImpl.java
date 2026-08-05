@@ -1,5 +1,6 @@
 package com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.IHistoriaClinicaUseCase;
@@ -41,6 +42,11 @@ public class HistoriaClinicaUseCaseImpl implements IHistoriaClinicaUseCase {
 			throw new ReglaNegocioException("El cliente con id " + idCliente
 					+ " ya tiene una historia clínica registrada.");
 		});
+
+		if (nuevaHistoriaClinica.getFechaApertura() == null) {
+			nuevaHistoriaClinica.setFechaApertura(new Date());
+		}
+		nuevaHistoriaClinica.setEstado(true);
 
 		return conExamenes(repositorio.guardar(nuevaHistoriaClinica));
 	}

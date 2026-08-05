@@ -17,19 +17,14 @@ public class ClienteRequesDto {
 	private String nombres;
 	@NotBlank
 	private String apellidos;
-	@NotNull
 	private Date fechaNacimiento;
 	@Min(value = 0, message = "La edad no puede ser negativa")
 	private int edad;
-	@NotBlank
 	private String ocupacion;
 	@NotBlank
 	private String celular;
-	@NotBlank
 	private String correo;
-	@NotNull
 	private Date fechaRegistro;
-	@NotNull
 	private Boolean estado;
 
 }

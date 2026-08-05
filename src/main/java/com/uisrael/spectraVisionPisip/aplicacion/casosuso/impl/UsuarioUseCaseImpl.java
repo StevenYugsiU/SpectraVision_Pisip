@@ -39,6 +39,7 @@ public class UsuarioUseCaseImpl implements IUsuarioUseCase {
 		});
 
 		nuevoUsuario.setContrasena(passwordEncoder.encode(nuevoUsuario.getContrasena()));
+		nuevoUsuario.setEstado(true);
 
 		return repositorio.guardar(nuevoUsuario);
 	}

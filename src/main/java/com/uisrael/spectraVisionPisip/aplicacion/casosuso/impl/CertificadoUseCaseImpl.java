@@ -1,5 +1,6 @@
 package com.uisrael.spectraVisionPisip.aplicacion.casosuso.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.uisrael.spectraVisionPisip.aplicacion.casosuso.entrada.ICertificadoUseCase;
@@ -27,6 +28,10 @@ public class CertificadoUseCaseImpl implements ICertificadoUseCase{
 		examenVisualRepositorio.buscarPorId(idExamen)
 				.orElseThrow(() -> new RecursoNoEncontradoException(
 						"No se encontro el examen visual con id " + idExamen));
+
+		if (nuevoCertificado.getFechaGeneracion() == null) {
+			nuevoCertificado.setFechaGeneracion(new Date());
+		}
 
 		return repositorio.guardar(nuevoCertificado);
 	}

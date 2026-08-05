@@ -15,6 +15,8 @@ import com.uisrael.spectraVisionPisip.dominio.servicios.INotificacionService;
 
 public class CitaUseCaseImpl implements ICitaUseCase{
 
+	private static final String ESTADO_PENDIENTE = "Pendiente";
+
 	private final ICitaRepositorio repositorio;
 	private final IClienteRepositorio clienteRepositorio;
 	private final INotificacionService notificacionService;
@@ -32,6 +34,8 @@ public class CitaUseCaseImpl implements ICitaUseCase{
 	public Cita guardar(Cita nuevaCita) {
 
 		validarDisponibilidad(nuevaCita.getFecha(), nuevaCita.getHora(), nuevaCita.getIdCita());
+
+		nuevaCita.setEstado(ESTADO_PENDIENTE);
 
 		Cita citaGuardada = repositorio.guardar(nuevaCita);
 		enviarConfirmacionWhatsApp(citaGuardada);

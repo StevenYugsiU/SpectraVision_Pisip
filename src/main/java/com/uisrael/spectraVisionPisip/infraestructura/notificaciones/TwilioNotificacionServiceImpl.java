@@ -52,6 +52,7 @@ public class TwilioNotificacionServiceImpl implements INotificacionService {
 			return null;
 		}
 		String soloDigitos = celular.replaceAll("[^0-9]", "");
+		
 		if (soloDigitos.startsWith("0")) {
 			soloDigitos = "593" + soloDigitos.substring(1);
 		} else if (!soloDigitos.startsWith("593")) {
