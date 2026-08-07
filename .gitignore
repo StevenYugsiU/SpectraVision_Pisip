@@ -33,3 +33,6 @@ build/
 .vscode/
 bin/
 
+### Claude Code ###
+.claude/
+
